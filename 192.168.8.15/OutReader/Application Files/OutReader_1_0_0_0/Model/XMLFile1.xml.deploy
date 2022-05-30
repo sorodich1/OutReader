@@ -1,0 +1,247 @@
+﻿Received Message ASCII: X☺☺☺☺☺☺☺☺ьB
+----
+Received Message HEX: 58 01 01 01 01 01 01 01 01 ec 42
+----
+08:29:23 - WS_SendBinary(352, message, 11, 0)
+08:29:23 - 11 of 11 bytes sent (binary)
+08:29:25 - Handle READ for socket 352
+08:29:25 - WS_Recv(352, message, 4, 0)
+08:29:25 - 4 bytes received.
+----
+Received Message ASCII: X:p
+----
+Received Message HEX: 58 00 3a 70
+----
+08:29:25 - WS_SendBinary(356, message, 4, 0)
+08:29:25 - 4 of 4 bytes sent (binary)
+08:29:25 - Handle READ for socket 356
+08:29:25 - WS_Recv(356, message, 5, 0)
+08:29:25 - 5 bytes received.
+----
+Received Message ASCII: ☻v￼
+----
+Received Message HEX: 58 08 02 76 12
+----
+08:29:25 - WS_SendBinary(352, message, 5, 0)
+08:29:25 - 5 of 5 bytes sent (binary)
+08:29:25 - Handle READ for socket 352
+08:29:25 - WS_Recv(352, message, 7, 0)
+08:29:25 - 7 bytes received.
+----
+Received Message ASCII: X☺☺Х═
+----
+Received Message HEX: 58 00 01 00 01 95 cd
+----
+08:29:25 - WS_SendBinary(356, message, 7, 0)
+08:29:25 - 7 of 7 bytes sent (binary)
+08:29:25 - Handle READ for socket 356
+08:29:25 - WS_Recv(356, message, 5, 0)
+08:29:25 - 5 bytes received.
+----
+Received Message ASCII: ￼6￼
+----
+Received Message HEX: 58 08 01 36 13
+----
+08:29:26 - WS_SendBinary(352, message, 5, 0)
+08:29:26 - 5 of 5 bytes sent (binary)
+08:29:26 - Handle READ for socket 352
+08:29:26 - WS_Recv(352, message, 19, 0)
+08:29:26 - 19 bytes received.
+----
+Received Message ASCII: X↔♀4X↕☺◄               ┤х├╖_I└╤
+----
+Received Message HEX: 58 1d 0c 34 58 12 01 11 09 00 00 b4 e5 c3 b7 5f 49 c0 d1
+----
+08:29:26 - WS_SendBinary(356, message, 19, 0)
+08:29:26 - 19 of 19 bytes sent (binary)
+08:29:26 - Handle READ for socket 356
+08:29:26 - WS_Recv(356, message, 5, 0)
+08:29:26 - 5 bytes received.
+----
+Received Message ASCII: X♦Є╙
+----
+Received Message HEX: 58 04 00 f2 d3
+----
+08:29:26 - WS_SendBinary(352, message, 5, 0)
+08:29:26 - 5 of 5 bytes sent (binary)
+08:29:27 - Handle READ for socket 352
+08:29:27 - WS_Recv(352, message, 11, 0)
+08:29:27 - 11 bytes received.
+----
+Received Message ASCII: XY♣▬☻↑☺_g
+----
+Received Message HEX: 58 59 28 08 05 16 02 18 01 5f 67
+----
+08:29:27 - WS_SendBinary(356, message, 11, 0)
+08:29:27 - 11 of 11 bytes sent (binary)
+08:29:27 - Handle READ for socket 356
+08:29:27 - WS_Recv(356, message, 8, 0)
+08:29:27 - 8 bytes received.
+----
+Received Message ASCII: X♠☻♠жP▼&
+----
+Received Message HEX: 58 06 02 06 a6 50 1f 26
+----
+08:29:27 - WS_SendBinary(352, message, 8, 0)
+08:29:27 - 8 of 8 bytes sent (binary)
+08:29:27 - Handle READ for socket 352
+08:29:27 - WS_Recv(352, message, 83, 0)
+08:29:27 - 83 bytes received.
+----
+Received Message ASCII: X2←⌂       #Ъu}2←⌂       #Ъu}                       V4
+----
+Received Message HEX: 58 32 00 1b 7f ff ff ff ff 23 00 9a 75 00 00 7d 00 32 00 1
+b 7f ff ff ff ff 23 00 9a 75 00 00 7d 00 00 00 00 00 ff ff ff ff 00 00 00 00 00
+00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff
+00 00 00 00 00 00 00 00 56 34
+----
+08:29:27 - WS_SendBinary(356, message, 83, 0)
+08:29:27 - 83 of 83 bytes sent (binary)
+08:29:32 - Handle READ for socket 356
+08:29:32 - WS_Recv(356, message, 8, 0)
+08:29:32 - 8 bytes received.
+----
+Received Message ASCII: X♠☻♠жP▼&
+----
+Received Message HEX: 58 06 02 06 a6 50 1f 26
+----
+08:29:32 - WS_SendBinary(352, message, 8, 0)
+08:29:32 - 8 of 8 bytes sent (binary)
+08:29:34 - Handle READ for socket 352
+08:29:34 - WS_Recv(352, message, 83, 0)
+08:29:34 - 83 bytes received.
+----
+Received Message ASCII: X2←⌂       #Ъu}2←⌂       #Ъu}                       V4
+----
+Received Message HEX: 58 32 00 1b 7f ff ff ff ff 23 00 9a 75 00 00 7d 00 32 00 1
+b 7f ff ff ff ff 23 00 9a 75 00 00 7d 00 00 00 00 00 ff ff ff ff 00 00 00 00 00
+00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff
+00 00 00 00 00 00 00 00 56 34
+----
+08:29:34 - WS_SendBinary(356, message, 83, 0)
+08:29:34 - 83 of 83 bytes sent (binary)
+08:29:38 - Handle READ for socket 356
+08:29:38 - WS_Recv(356, message, 8, 0)
+08:29:38 - 8 bytes received.
+----
+Received Message ASCII: X♠☻♠жP▼&
+----
+Received Message HEX: 58 06 02 06 a6 50 1f 26
+----
+08:29:38 - WS_SendBinary(352, message, 8, 0)
+08:29:39 - 8 of 8 bytes sent (binary)
+08:29:40 - Handle READ for socket 352
+08:29:40 - WS_Recv(352, message, 22, 0)
+08:29:40 - 22 bytes received.
+----
+Received Message ASCII: X2←⌂       #Ъu}2←⌂ 
+----
+Received Message HEX: 58 32 00 1b 7f ff ff ff ff 23 00 9a 75 00 00 7d 00 32 00 1
+b 7f ff
+----
+08:29:40 - WS_SendBinary(356, message, 22, 0)
+08:29:40 - 22 of 22 bytes sent (binary)
+08:29:40 - Handle READ for socket 352
+08:29:40 - WS_Recv(352, message, 61, 0)
+08:29:40 - 61 bytes received.
+----
+Received Message ASCII:       #Ъu}                       V4
+----
+Received Message HEX: ff ff ff 23 00 9a 75 00 00 7d 00 00 00 00 00 ff ff ff ff 0
+0 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00
+00 ff ff ff ff 00 00 00 00 00 00 00 00 56 34
+----
+08:29:40 - WS_SendBinary(356, message, 61, 0)
+08:29:40 - 61 of 61 bytes sent (binary)
+08:29:40 - Handle READ for socket 356
+08:29:40 - WS_Recv(356, message, 8, 0)
+08:29:40 - 8 bytes received.
+----
+Received Message ASCII: X♠☻♠√P'╢
+----
+Received Message HEX: 58 06 02 06 fb 50 27 b6
+----
+08:29:40 - WS_SendBinary(352, message, 8, 0)
+08:29:40 - 8 of 8 bytes sent (binary)
+08:29:41 - Handle READ for socket 352
+08:29:41 - WS_Recv(352, message, 83, 0)
+08:29:41 - 83 bytes received.
+----
+Received Message ASCII: X1;       "XF}1;       "XF}                       эv
+----
+Received Message HEX: 58 31 00 00 3b ff ff ff ff 22 00 58 46 00 00 7d 00 31 00 0
+0 3b ff ff ff ff 22 00 58 46 00 00 7d 00 00 00 00 00 ff ff ff ff 00 00 00 00 00
+00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff
+00 00 00 00 00 00 00 00 ed 76
+----
+08:29:41 - WS_SendBinary(356, message, 83, 0)
+08:29:41 - 83 of 83 bytes sent (binary)
+08:29:45 - Handle READ for socket 356
+08:29:45 - WS_Recv(356, message, 8, 0)
+08:29:45 - 8 bytes received.
+----
+Received Message ASCII: X♠☻♠√P'╢
+----
+Received Message HEX: 58 06 02 06 fb 50 27 b6
+----
+08:29:45 - WS_SendBinary(352, message, 8, 0)
+08:29:45 - 8 of 8 bytes sent (binary)
+08:29:47 - Handle READ for socket 352
+08:29:47 - WS_Recv(352, message, 83, 0)
+08:29:47 - 83 bytes received.
+----
+Received Message ASCII: X1;       "XF}1;       "XF}                       эv
+----
+Received Message HEX: 58 31 00 00 3b ff ff ff ff 22 00 58 46 00 00 7d 00 31 00 0
+0 3b ff ff ff ff 22 00 58 46 00 00 7d 00 00 00 00 00 ff ff ff ff 00 00 00 00 00
+00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff
+00 00 00 00 00 00 00 00 ed 76
+----
+08:29:48 - WS_SendBinary(356, message, 83, 0)
+08:29:48 - 83 of 83 bytes sent (binary)
+08:29:52 - Handle READ for socket 356
+08:29:52 - WS_Recv(356, message, 8, 0)
+08:29:52 - 8 bytes received.
+----
+Received Message ASCII: X♠☻♠√P'╢
+----
+Received Message HEX: 58 06 02 06 fb 50 27 b6
+----
+08:29:52 - WS_SendBinary(352, message, 8, 0)
+08:29:52 - 8 of 8 bytes sent (binary)
+08:29:53 - Handle READ for socket 352
+08:29:53 - WS_Recv(352, message, 83, 0)
+08:29:53 - 83 bytes received.
+----
+Received Message ASCII: X1;       "XF}1;       "XF}                       эv
+----
+Received Message HEX: 58 31 00 00 3b ff ff ff ff 22 00 58 46 00 00 7d 00 31 00 0
+0 3b ff ff ff ff 22 00 58 46 00 00 7d 00 00 00 00 00 ff ff ff ff 00 00 00 00 00
+00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff
+00 00 00 00 00 00 00 00 ed 76
+----
+08:29:53 - WS_SendBinary(356, message, 83, 0)
+08:29:53 - 83 of 83 bytes sent (binary)
+08:29:57 - Handle READ for socket 356
+08:29:57 - WS_Recv(356, message, 8, 0)
+08:29:57 - 8 bytes received.
+----
+Received Message ASCII: X♠☻♠√P'╢
+----
+Received Message HEX: 58 06 02 06 fb 50 27 b6
+----
+08:29:57 - WS_SendBinary(352, message, 8, 0)
+08:29:57 - 8 of 8 bytes sent (binary)
+08:29:59 - Handle READ for socket 352
+08:30:10 - WS_Recv(352, message, 83, 0)
+08:30:10 - 83 bytes received.
+----
+Received Message ASCII: X1;       "XF}1;       "XF}                       эv
+----
+Received Message HEX: 58 31 00 00 3b ff ff ff ff 22 00 58 46 00 00 7d 00 31 00 0
+0 3b ff ff ff ff 22 00 58 46 00 00 7d 00 00 00 00 00 ff ff ff ff 00 00 00 00 00
+00 00 00 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff
+00 00 00 00 00 00 00 00 ed 76
+----
+08:30:10 - WS_SendBinary(356, message, 83, 0)
+08:30:10 - 83 of 83 bytes sent (binary)

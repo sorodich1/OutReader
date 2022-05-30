@@ -1,0 +1,111 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="OutReader.Properties" GeneratedClassName="Config">
+  <Profiles />
+  <Settings>
+    <Setting Name="Elizarovo2Enabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ElizarovoSimaticEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="BrickEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="StreamLuxEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MerkurEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ServerIp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.8.15</Value>
+    </Setting>
+    <Setting Name="ElizarovoPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5129</Value>
+    </Setting>
+    <Setting Name="BrickPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5128</Value>
+    </Setting>
+    <Setting Name="StreamLuxPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">21710</Value>
+    </Setting>
+    <Setting Name="ElizarovoInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="BrickInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="ElizarovoSimaticInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60000</Value>
+    </Setting>
+    <Setting Name="StreamLuxInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">150000</Value>
+    </Setting>
+    <Setting Name="Merkur1Id" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">29125194</Value>
+    </Setting>
+    <Setting Name="Merkur1Port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">21701</Value>
+    </Setting>
+    <Setting Name="TeplosetEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="TeplosetInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">120000</Value>
+    </Setting>
+    <Setting Name="VzletInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3600000</Value>
+    </Setting>
+    <Setting Name="VzletEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="VzletComPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">COM1</Value>
+    </Setting>
+    <Setting Name="MerkurInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">900000</Value>
+    </Setting>
+    <Setting Name="LiftWaterIp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.22.100</Value>
+    </Setting>
+    <Setting Name="LiftWaterEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LiftWaterInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20000</Value>
+    </Setting>
+    <Setting Name="OwenLiftWaterIp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.22.150</Value>
+    </Setting>
+    <Setting Name="OwenLiftWaterEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="OwenLiftWaterInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20000</Value>
+    </Setting>
+    <Setting Name="GeoKiselevaEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GeoKiselevaInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100000</Value>
+    </Setting>
+    <Setting Name="GeoKiselevaIp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.8.99</Value>
+    </Setting>
+    <Setting Name="GeoKiselevaPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">21703</Value>
+    </Setting>
+    <Setting Name="KNSInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">30000</Value>
+    </Setting>
+    <Setting Name="KNSIP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.8.99</Value>
+    </Setting>
+    <Setting Name="KNSEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="StreamLuxIP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.8.99</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

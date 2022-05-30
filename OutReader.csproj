@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B788D7FE-BCA3-485B-88E6-5D43A172592B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OutReader</RootNamespace>
+    <AssemblyName>OutReader</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\Reader\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>47</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>OutReader.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>9122DFCBC97627EBE1367D6B8FF84853B68D0FE0</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>OutReader_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClearScada.Client">
+      <HintPath>..\..\Program Files\Schneider Electric\ClearSCADA\ClearScada.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.6.3.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>packages\HtmlAgilityPack.1.6.3\lib\Net40\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Modbus">
+      <HintPath>..\LiftWater\lib\Modbus.dll</HintPath>
+    </Reference>
+    <Reference Include="Modbus.Extensions">
+      <HintPath>..\LiftWater\lib\Modbus.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WinSCPnet">
+      <HintPath>lib\WinSCPnet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helper\ConvertHelper.cs" />
+    <Compile Include="Helper\DbHelper.cs" />
+    <Compile Include="Helper\HtmlHelper.cs" />
+    <Compile Include="Helper\MerkurHelper.cs" />
+    <Compile Include="Helper\ModbusHelper.cs" />
+    <Compile Include="Helper\S1200Helper.cs" />
+    <Compile Include="Helper\ScadaHelper.cs" />
+    <Compile Include="Model\Apb.cs" />
+    <Compile Include="Model\CRC.cs" />
+    <Compile Include="Model\GeoKiseleva.cs" />
+    <Compile Include="Model\Kns.cs" />
+    <Compile Include="Model\KnsDevice.cs" />
+    <Compile Include="Model\MB16D.cs" />
+    <Compile Include="Model\MB8A.cs" />
+    <Compile Include="Model\ME3M.cs" />
+    <Compile Include="Model\ObjectReader.cs" />
+    <Compile Include="Model\OwenLiftWater.cs" />
+    <Compile Include="Model\LW.cs" />
+    <Compile Include="Model\LiftWater\Alarm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\AlarmType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\Compressor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\CompressorData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\CompressorStatus.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\ConverterHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\DataUpdate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\Dos.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\DoseData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\DoseStatu.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\DrainPump.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\DrainPumpData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\Error.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\FlowMeter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\FlowMeterData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\KNSData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\KNSPump.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\KNSPumpData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\LiftWaterPump.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\LiftWaterPumpData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\LiftWaterStatu.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\ModbusHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\OwenDose.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\PSHU.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\PSHUData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\ReactionChamber.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\ReactionChamberData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\Tank.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\TankData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\Valve.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\ValveData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\Well.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\WellData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\WellPump.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\WellPumpData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LiftWater\WinSCPHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\PR200.cs" />
+    <Compile Include="Model\ROC.cs" />
+    <Compile Include="Model\SI30.cs" />
+    <Compile Include="Model\SBI.cs" />
+    <Compile Include="Model\TER.cs" />
+    <Compile Include="Model\Teploset.cs" />
+    <Compile Include="Model\Teplosets.cs" />
+    <Compile Include="Model\Merkur.cs" />
+    <Compile Include="Model\Brick.cs" />
+    <Compile Include="Model\ElizarovoSimatic.cs" />
+    <Compile Include="Model\Elizarovo.cs" />
+    <Compile Include="Model\IObject.cs" />
+    <Compile Include="Model\M.cs" />
+    <Compile Include="Model\Pulsar.cs" />
+    <Compile Include="Model\S1200.cs" />
+    <Compile Include="Model\ScadaUser.cs" />
+    <Compile Include="Model\StreamLux.cs" />
+    <Compile Include="Model\Tag.cs" />
+    <Compile Include="Model\Tn.cs" />
+    <Compile Include="Model\Us.cs" />
+    <Compile Include="Model\Vzlet.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Config.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Config.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="OutReader_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\Config.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Config.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ScxV6DbClient">
+      <Guid>{EEAD2000-0777-11D2-AF05-0000E82E7A14}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>2</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\XMLFile1.xml" />
+    <Content Include="OutReader.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.1 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль .NET Framework 3.5 с пакетом обновления 1 %28SP1%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+            <section name="OutReader.Properties.Config" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false"/>
+            <section name="OutReader.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false"/>
+        </sectionGroup>
+    </configSections>
+    <startup> 
+        
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.1"/></startup>
+    <userSettings>
+        <OutReader.Properties.Config>
+            <setting name="Elizarovo2Enabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="ElizarovoSimaticEnabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="BrickEnabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="StreamLuxEnabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="MerkurEnabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="ServerIp" serializeAs="String">
+                <value>192.168.8.15</value>
+            </setting>
+            <setting name="ElizarovoPort" serializeAs="String">
+                <value>5129</value>
+            </setting>
+            <setting name="BrickPort" serializeAs="String">
+                <value>5128</value>
+            </setting>
+            <setting name="StreamLuxPort" serializeAs="String">
+                <value>21710</value>
+            </setting>
+            <setting name="ElizarovoInterval" serializeAs="String">
+                <value>1000</value>
+            </setting>
+            <setting name="BrickInterval" serializeAs="String">
+                <value>1000</value>
+            </setting>
+            <setting name="ElizarovoSimaticInterval" serializeAs="String">
+                <value>60000</value>
+            </setting>
+            <setting name="StreamLuxInterval" serializeAs="String">
+                <value>150000</value>
+            </setting>
+            <setting name="Merkur1Id" serializeAs="String">
+                <value>29125194</value>
+            </setting>
+            <setting name="Merkur1Port" serializeAs="String">
+                <value>21701</value>
+            </setting>
+            <setting name="TeplosetEnabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="TeplosetInterval" serializeAs="String">
+                <value>120000</value>
+            </setting>
+            <setting name="VzletInterval" serializeAs="String">
+                <value>3600000</value>
+            </setting>
+            <setting name="VzletEnabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="VzletComPort" serializeAs="String">
+                <value>COM1</value>
+            </setting>
+            <setting name="MerkurInterval" serializeAs="String">
+                <value>900000</value>
+            </setting>
+            <setting name="LiftWaterIp" serializeAs="String">
+                <value>192.168.22.100</value>
+            </setting>
+            <setting name="LiftWaterEnabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="LiftWaterInterval" serializeAs="String">
+                <value>20000</value>
+            </setting>
+            <setting name="OwenLiftWaterIp" serializeAs="String">
+                <value>192.168.22.150</value>
+            </setting>
+            <setting name="OwenLiftWaterEnabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="OwenLiftWaterInterval" serializeAs="String">
+                <value>20000</value>
+            </setting>
+            <setting name="GeoKiselevaEnabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="GeoKiselevaInterval" serializeAs="String">
+                <value>100000</value>
+            </setting>
+            <setting name="GeoKiselevaIp" serializeAs="String">
+                <value>192.168.8.99</value>
+            </setting>
+            <setting name="GeoKiselevaPort" serializeAs="String">
+                <value>21703</value>
+            </setting>
+            <setting name="KNSInterval" serializeAs="String">
+                <value>30000</value>
+            </setting>
+            <setting name="KNSIP" serializeAs="String">
+                <value>192.168.8.99</value>
+            </setting>
+            <setting name="KNSEnabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="StreamLuxIP" serializeAs="String">
+                <value>192.168.8.99</value>
+            </setting>
+        </OutReader.Properties.Config>
+        <OutReader.Properties.Settings>
+            <setting name="Setting" serializeAs="String">
+                <value>3</value>
+            </setting>
+        </OutReader.Properties.Settings>
+    </userSettings>
+</configuration>
