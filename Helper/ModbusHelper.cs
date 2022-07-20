@@ -93,7 +93,180 @@ namespace OutReader.Helper
             }
             return mb;
         }
+        public static OBEH ReadOBEH(TcpClient client, int modbusId = 1)
+        {
+            OBEH mb = null;
+            try
+            {
+                var vt = new byte[] { (byte)modbusId, 0x03, 0x00, 0x00, 0x00, 0x01, 0, 0 };
+                var crc = BitConverter.GetBytes(ModRTU_CRC(vt, 6));
+                vt[6] = crc[0];
+                vt[7] = crc[1];
+                //Sending the byte array to the server
+                client.Client.Send(vt);
+                //Get the network stream
+                NetworkStream stream = client.GetStream();
+                byte[] buffer = new byte[8];
+                int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                var res = BitConverter.ToInt16(
+                        new byte[]
+                        {
+                            buffer[4], buffer[3]
+                        }, 0);
 
+                mb = new OBEH(res);
+            }
+            catch (Exception ex)
+            {
+                var zz = ex;
+            }
+            return mb;
+        }
+        public static OBEH_2 ReadOBEH_2(TcpClient client, int modbusId = 1)
+        {
+            OBEH_2 mb = null;
+            try
+            {
+                var vt = new byte[] { (byte)modbusId, 0x03, 0x00, 0x01, 0x00, 0x01, 0, 0 };
+                var crc = BitConverter.GetBytes(ModRTU_CRC(vt, 6));
+                vt[6] = crc[0];
+                vt[7] = crc[1];
+                //Sending the byte array to the server
+                client.Client.Send(vt);
+                //Get the network stream
+                NetworkStream stream = client.GetStream();
+                byte[] buffer = new byte[8];
+                int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                var res = BitConverter.ToInt16(
+                        new byte[]
+                        {
+                            buffer[4], buffer[3]
+                        }, 0);
+
+                mb = new OBEH_2(res);
+            }
+            catch (Exception ex)
+            {
+                var zz = ex;
+            }
+            return mb;
+        }
+        public static OBEH_3 ReadOBEH_3(TcpClient client, int modbusId = 1)
+        {
+            OBEH_3 mb = null;
+            try
+            {
+                var vt = new byte[] { (byte)modbusId, 0x03, 0x00, 0x02, 0x00, 0x01, 0, 0 };
+                var crc = BitConverter.GetBytes(ModRTU_CRC(vt, 6));
+                vt[6] = crc[0];
+                vt[7] = crc[1];
+                //Sending the byte array to the server
+                client.Client.Send(vt);
+                //Get the network stream
+                NetworkStream stream = client.GetStream();
+                byte[] buffer = new byte[8];
+                int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                var res = BitConverter.ToInt16(
+                        new byte[]
+                        {
+                            buffer[4], buffer[3]
+                        }, 0);
+
+                mb = new OBEH_3(res);
+            }
+            catch (Exception ex)
+            {
+                var zz = ex;
+            }
+            return mb;
+        }
+        public static OBEH_VRU ReadOBEH_VRU(TcpClient client, int modbusId = 1)
+        {
+            OBEH_VRU mb = null;
+            try
+            {
+                var vt = new byte[] { (byte)modbusId, 0x03, 0x00, 0x08, 0x00, 0x01, 0, 0 };
+                var crc = BitConverter.GetBytes(ModRTU_CRC(vt, 6));
+                vt[6] = crc[0];
+                vt[7] = crc[1];
+                //Sending the byte array to the server
+                client.Client.Send(vt);
+                //Get the network stream
+                NetworkStream stream = client.GetStream();
+                byte[] buffer = new byte[8];
+                int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                var res = BitConverter.ToInt16(
+                        new byte[]
+                        {
+                            buffer[4], buffer[3]
+                        }, 0);
+
+                mb = new OBEH_VRU(res);
+            }
+            catch (Exception ex)
+            {
+                var zz = ex;
+            }
+            return mb;
+        }
+        public static OBEH_Alarm ReadOBEH_Alarm(TcpClient client, int modbusId = 1)
+        {
+            OBEH_Alarm mb = null;
+            try
+            {
+                var vt = new byte[] { (byte)modbusId, 0x03, 0x00, 0x09, 0x00, 0x01, 0, 0 };
+                var crc = BitConverter.GetBytes(ModRTU_CRC(vt, 6));
+                vt[6] = crc[0];
+                vt[7] = crc[1];
+                //Sending the byte array to the server
+                client.Client.Send(vt);
+                //Get the network stream
+                NetworkStream stream = client.GetStream();
+                byte[] buffer = new byte[8];
+                int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                var res = BitConverter.ToInt16(
+                        new byte[]
+                        {
+                            buffer[4], buffer[3]
+                        }, 0);
+
+                mb = new OBEH_Alarm(res);
+            }
+            catch (Exception ex)
+            {
+                var zz = ex;
+            }
+            return mb;
+        }
+        public static OBEH_level ReadOBEH_level(TcpClient client, int modbusId = 1)
+        {
+            OBEH_level mb = null;
+            try
+            {
+                var vt = new byte[] { (byte)modbusId, 0x03, 0x00, 0x07, 0x00, 0x01, 0, 0 };
+                var crc = BitConverter.GetBytes(ModRTU_CRC(vt, 6));
+                vt[6] = crc[0];
+                vt[7] = crc[1];
+                //Sending the byte array to the server
+                client.Client.Send(vt);
+                //Get the network stream
+                NetworkStream stream = client.GetStream();
+                byte[] buffer = new byte[8];
+                int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                var res = BitConverter.ToInt16(
+                        new byte[]
+                        {
+                            buffer[4], buffer[3]
+                        }, 0);
+
+                mb = new OBEH_level(res);
+            }
+            catch (Exception ex)
+            {
+                var zz = ex;
+            }
+            return mb;
+        }
         public static decimal ReadMass(TcpClient client)
         {
             try
@@ -170,6 +343,27 @@ namespace OutReader.Helper
             {
                 mb = new MB8A();
                 mb.A1 = MBAnalog(client, modbusId, new byte[] {0, 4});
+                mb.A2 = MBAnalog(client, modbusId, new byte[] { 0, 10 });
+                mb.A3 = MBAnalog(client, modbusId, new byte[] { 0, 16 });
+                mb.A4 = MBAnalog(client, modbusId, new byte[] { 0, 22 });
+                mb.A5 = MBAnalog(client, modbusId, new byte[] { 0, 28 });
+                mb.A6 = MBAnalog(client, modbusId, new byte[] { 0, 34 });
+                mb.A7 = MBAnalog(client, modbusId, new byte[] { 0, 40 });
+                mb.A8 = MBAnalog(client, modbusId, new byte[] { 0, 46 });
+            }
+            catch (Exception ex)
+            {
+                var zz = ex;
+            }
+            return mb;
+        }
+        public static MB8A_OBEH ReadMB8A_OBEH(TcpClient client, int modbusId = 1)
+        {
+            MB8A_OBEH mb = null;
+            try
+            {
+                mb = new MB8A_OBEH();
+                mb.A1 = MBAnalog(client, modbusId, new byte[] { 0, 4 });
                 mb.A2 = MBAnalog(client, modbusId, new byte[] { 0, 10 });
                 mb.A3 = MBAnalog(client, modbusId, new byte[] { 0, 16 });
                 mb.A4 = MBAnalog(client, modbusId, new byte[] { 0, 22 });

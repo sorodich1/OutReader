@@ -20,6 +20,14 @@ namespace OutReader.Model
             get { return Name == "MB16D"; }
         }
         public bool IsMB8A { get { return Name == "MB8A"; } }
+        public bool IsMB8A_OBEH { get { return Name == "MB8A_OBEH"; } }
+        public bool IsOBEH { get { return Name == "OBEH"; } } //true
+        public bool IsOBEH_2 { get { return Name == "OBEH_2"; } } //true
+        public bool IsOBEH_3 { get { return Name == "OBEH_3"; } } //true
+        public bool IsOBEH_VRU { get { return Name == "OBEH_VRU"; } } //true
+        public bool IsOBEH_Alarm { get { return Name == "OBEH_Alarm"; } } //true
+        public bool IsOBEH_level { get { return Name == "OBEH_level"; } } //true
+
         public bool IsTER { get { return Name == "TER"; } }
         public bool IsMR { get { return Name == "MR"; } }
         /// <summary>

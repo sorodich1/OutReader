@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\Reader\</PublishUrl>
+    <PublishUrl>C:\work\OutReader\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>47</ApplicationRevision>
+    <ApplicationRevision>49</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -103,6 +103,13 @@
     <Compile Include="Model\GeoKiseleva.cs" />
     <Compile Include="Model\Kns.cs" />
     <Compile Include="Model\KnsDevice.cs" />
+    <Compile Include="Model\MB8A_OBEH.cs" />
+    <Compile Include="Model\OBEH_level.cs" />
+    <Compile Include="Model\OBEH_Alarm.cs" />
+    <Compile Include="Model\OBEH_VRU.cs" />
+    <Compile Include="Model\OBEH_3.cs" />
+    <Compile Include="Model\OBEH_2.cs" />
+    <Compile Include="Model\OBEH.cs" />
     <Compile Include="Model\MB16D.cs" />
     <Compile Include="Model\MB8A.cs" />
     <Compile Include="Model\ME3M.cs" />

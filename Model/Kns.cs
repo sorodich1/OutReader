@@ -25,7 +25,14 @@ namespace OutReader.Model
             Devices = new List<KnsDevice>();
             MB16Ds = new List<MB16D>();
             MB8As = new List<MB8A>();
+            MB8A_OBEHs = new List<MB8A_OBEH>();
             TERs = new List<TER>();
+            OBEHs = new List<OBEH>();
+            OBEH_2s = new List<OBEH_2>();
+            OBEH_3s = new List<OBEH_3>();
+            OBEH_VRUs = new List<OBEH_VRU>();
+            OBEH_Alarms = new List<OBEH_Alarm>();
+            OBEH_levels = new List<OBEH_level>();
         }
 
         public Kns(int port, string ip, string id, string title)
@@ -37,34 +44,57 @@ namespace OutReader.Model
             Devices = new List<KnsDevice>();
             MB16Ds = new List<MB16D>();
             MB8As = new List<MB8A>();
+            MB8A_OBEHs = new List<MB8A_OBEH>();
             TERs = new List<TER>();
             SBIs = new List<SBI>();
             ME3m = new List<ME3M>();
+            OBEHs = new List<OBEH>();
+            OBEH_2s = new List<OBEH_2>();
+            OBEH_3s = new List<OBEH_3>();
+            OBEH_VRUs = new List<OBEH_VRU>();
+            OBEH_Alarms = new List<OBEH_Alarm>();
+            OBEH_levels = new List<OBEH_level>();
         }
         public MB16D MB16D { get; private set; }
         public MB8A MB8A { get; private set; }
+        public MB8A_OBEH MB8A_OBEH { get; private set; }
         public Tn Tn { get; set; }
         public ME3M ME3M { get; set; }
+        public OBEH OBEH { get; set; }
+        public OBEH_2 OBEH_2 { get; set; }
+        public OBEH_3 OBEH_3 { get; set; }
+        public OBEH_VRU OBEH_VRU { get; set; }
+        public OBEH_Alarm OBEH_Alarm { get; set; }
+        public OBEH_level OBEH_level { get; set; }
+
         public string KNSId { get { return _id; } }
         public List<KnsDevice> Devices { get; set; }
         public List<MB16D> MB16Ds { get; private set; }
         public List<MB8A> MB8As { get; private set; }
+        public List<MB8A_OBEH> MB8A_OBEHs { get; private set; }
         public List<TER> TERs { get; private set; }
         public List<SBI> SBIs { get; private set; }
         public List<ME3M> ME3m { get; private set; }
+        public List<OBEH> OBEHs { get; private set; }
+        public List<OBEH_2> OBEH_2s { get; private set; }
+        public List<OBEH_3> OBEH_3s { get; private set; }
+        public List<OBEH_VRU> OBEH_VRUs { get; private set; }
+        public List<OBEH_Alarm> OBEH_Alarms { get; private set; }
+        public List<OBEH_level> OBEH_levels { get; private set; }
+
         public override bool NotConnection { get { return MB16D==null || IsExceptionClient; } }
 
         public override void SaveToSql ()
         {
-            if (MB8As.Count > 0 || MB16Ds.Count > 0)
+            if (MB8As.Count > 0 || MB16Ds.Count > 0 || OBEHs.Count > 0 || OBEH_2s.Count > 0 || OBEH_3s.Count > 0 || OBEH_VRUs.Count > 0 || OBEH_Alarms.Count > 0 || OBEH_levels.Count > 0)
             {
 
                 DbHelper.SetKns ( this );
             }
-            else
-            {
-                DbHelper.SetKNSAlehinaAlarm ( _id );
-            }
+            //else
+            //{
+            //    DbHelper.SetKNSAlehinaAlarm ( _id );
+            //}
         }
 
         public override void SaveLogToSql()
@@ -91,12 +121,68 @@ namespace OutReader.Model
                             var mb16d = ModbusHelper.ReadM16D(client, device.ModbusId);
                             if (mb16d != null) MB16Ds.Add(mb16d);
                         }
+                        else if (device.IsOBEH) //true
+                        {
+                            var obeh = ModbusHelper.ReadOBEH(client, device.ModbusId);
+                            if (obeh != null)
+                            {
+                                OBEHs.Add(obeh);
+                            }
+                        }
+                        else if (device.IsOBEH_2) //true
+                        {
+                            var obeh_2 = ModbusHelper.ReadOBEH_2(client, device.ModbusId);
+                            if (obeh_2 != null)
+                            {
+                                OBEH_2s.Add(obeh_2);
+                            }
+                        }
+                        else if (device.IsOBEH_3) //true
+                        {
+                            var obeh_3 = ModbusHelper.ReadOBEH_3(client, device.ModbusId);
+                            if (obeh_3 != null)
+                            {
+                                OBEH_3s.Add(obeh_3);
+                            }
+                        }
+                        else if (device.IsOBEH_VRU) //true
+                        {
+                            var obeh_vru = ModbusHelper.ReadOBEH_VRU(client, device.ModbusId);
+                            if (obeh_vru != null)
+                            {
+                                OBEH_VRUs.Add(obeh_vru);
+                            }
+                        }
+                        else if (device.IsOBEH_Alarm) //true
+                        {
+                            var obeh_alarm = ModbusHelper.ReadOBEH_Alarm(client, device.ModbusId);
+                            if (obeh_alarm != null)
+                            {
+                                OBEH_Alarms.Add(obeh_alarm);
+                            }
+                        }
+                        else if (device.IsOBEH_level) //true
+                        {
+                            var obeh_level = ModbusHelper.ReadOBEH_level(client, device.ModbusId);
+                            if (obeh_level != null)
+                            {
+                                OBEH_levels.Add(obeh_level);
+                            }
+                        }
                         else if (device.IsMB8A)
                         {
                             var mb8a = ModbusHelper.ReadM8A(client, device.ModbusId);
                             if (mb8a != null)
                             {
                                 MB8As.Add(mb8a);
+                            }
+                        }
+                        else if (device.IsMB8A_OBEH)
+                        {
+                            var mb8a_obeh = ModbusHelper.ReadMB8A_OBEH(client, device.ModbusId);
+                            if (mb8a_obeh != null)
+                            {
+                                MB8A_OBEHs.Add(mb8a_obeh);
                             }
                         }
                         else if (device.IsTER)
@@ -180,6 +266,20 @@ namespace OutReader.Model
 
             if (MB8As != null && MB8As.Count > 0)
                 res += string.Format("MB8As:({0}) ", string.Join(" ", MB8As));
+            if (MB8A_OBEHs != null && MB8A_OBEHs.Count > 0)
+                res += string.Format("MB8A_OBEHs:({0}) ", string.Join(" ", MB8A_OBEHs));
+            if (OBEHs != null && OBEHs.Count > 0)
+                res += string.Format("OBEH:({0}) ", string.Join(" ", OBEHs));
+            if (OBEH_2s != null && OBEH_2s.Count > 0)
+                res += string.Format("OBEH_2:({0}) ", string.Join(" ", OBEH_2s));
+            if (OBEH_3s != null && OBEH_3s.Count > 0)
+                res += string.Format("OBEH_3:({0}) ", string.Join(" ", OBEH_3s));
+            if (OBEH_VRUs != null && OBEH_VRUs.Count > 0)
+                res += string.Format("OBEH_VRU:({0}) ", string.Join(" ", OBEH_VRUs));
+            if (OBEH_Alarms != null && OBEH_Alarms.Count > 0)
+                res += string.Format("OBEH_Alarm:({0}) ", string.Join(" ", OBEH_Alarms));
+            if (OBEH_levels != null && OBEH_levels.Count > 0)
+                res += string.Format("OBEH_level:({0}) ", string.Join(" ", OBEH_levels));
 
             if (TERs != null && TERs.Count > 0)
                 res += string.Format("TERs:({0}) ", string.Join(" ", TERs));

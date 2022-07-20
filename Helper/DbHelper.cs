@@ -83,10 +83,34 @@ namespace OutReader.Helper
                 query += getQueryKNS(kns.LastUpdate, kns.KNSId, 1, kns.MB16Ds[0].DI[13]); //работа насос 1
                 query += getQueryKNS(kns.LastUpdate, kns.KNSId, 2, kns.MB16Ds[0].DI[14]); //работа насос 2
             }
-
             /////////////////////////////
-            else{
-                if (kns.MB16Ds.Count > 0)
+            else
+            {
+                if (kns.OBEHs.Count > 0)
+                {
+                    if (kns.KNSId == "KNS18")
+                    {
+                        //query += getQueryKNS(kns.LastUpdate, kns.KNSId, 22, !kns.OBEHs[0].DI[1]);
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 19, kns.OBEHs[0].DI[1]); // авария насос 1
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 1, kns.OBEHs[0].DI[2]); //работа насос 1
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 20, kns.OBEH_2s[0].DI[1]); // авария насос 2
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 2, kns.OBEH_2s[0].DI[2]); //работа насос 2
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 21, kns.OBEH_3s[0].DI[1]); // авария насос 3
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 3, kns.OBEH_3s[0].DI[2]); //работа насос 3
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 24, kns.OBEH_VRUs[0].DI[2]); //Ввод 1
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 25, kns.OBEH_VRUs[0].DI[3]); //Ввод 2
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 71, kns.OBEH_Alarms[0].DI[0]); // авария ИБП
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 58, kns.OBEH_Alarms[0].DI[1]); // Авария пожара
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 22, kns.OBEH_Alarms[0].DI[2]); // Тревога ОС (Дверь)
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 75, kns.OBEH_Alarms[0].DI[3]); // Тревога ГА
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 56, kns.OBEH_Alarms[0].DI[4]); // Общая авария КНС
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 26, kns.OBEH_levels[0].DI[1]); //поплавок НН
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 27, kns.OBEH_levels[0].DI[2]); //поплавок Н
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 28, kns.OBEH_levels[0].DI[3]); //поплавок С
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 29, kns.OBEH_levels[0].DI[4]); //поплавок В
+                    }
+                }
+                else if (kns.MB16Ds.Count > 0)
                 {
                     if (kns.KNSId == "KNS06") //Prigorod
                         {
@@ -96,6 +120,7 @@ namespace OutReader.Helper
                             query += getQueryKNS ( kns.LastUpdate, kns.KNSId, 29, kns.MB16Ds [0].DI [6] ); //Поплавок,  высокий уровень
                             query += getQueryKNS ( kns.LastUpdate, kns.KNSId, 30, kns.MB16Ds [0].DI [7] );//Поплавок,аварийно высокий уровень
                         }
+                    
                     //ОСК
                     //else if (kns.KNSId == "KNS19")
                     //{
@@ -119,14 +144,14 @@ namespace OutReader.Helper
                     }
                      if (kns.KNSId == "KNS21") //Кампус
                     {
-                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 22, kns.MB16Ds[0].DI[0]); //Дверь
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 22, !kns.MB16Ds[0].DI[0]); //Дверь
                         //query += getQueryKNS(kns.LastUpdate, kns.KNSId, 24, kns.MB16Ds[0].DI[1]); //ввод 1
                         //query += getQueryKNS(kns.LastUpdate, kns.KNSId, 25, kns.MB16Ds[0].DI[2]); //ввод 2
-                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 26, kns.MB16Ds[0].DI[3]); //Сухой ход НН
-                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 27, kns.MB16Ds[0].DI[4]); //поплавок Низкий Н
-                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 28, kns.MB16Ds[0].DI[5]); //поплавок Средний С
-                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 29, kns.MB16Ds[0].DI[6]); //поплавок Высокий В
-                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 30, kns.MB16Ds[0].DI[7]); //поплавок Авария А
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 26, !kns.MB16Ds[0].DI[3]); //Сухой ход НН
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 27, !kns.MB16Ds[0].DI[4]); //поплавок Низкий Н
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 28, !kns.MB16Ds[0].DI[5]); //поплавок Средний С
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 29, !kns.MB16Ds[0].DI[6]); //поплавок Высокий В
+                        query += getQueryKNS(kns.LastUpdate, kns.KNSId, 30, !kns.MB16Ds[0].DI[7]); //поплавок Авария А
                     }
                 //Псковкирпич
                 else if (kns.KNSId == "KNS16")
@@ -184,15 +209,7 @@ namespace OutReader.Helper
                             query += getQueryKNS(kns.LastUpdate, kns.KNSId, 30, kns.MB16Ds[0].DI[7]); //поплавок Авария А
                             query += getQueryKNS(kns.LastUpdate, kns.KNSId, 29, kns.MB16Ds[0].DI[7]); //поплавок Высокий В
                         }
-                        //Орлецовская 
-                        else if (kns.KNSId == "KNS18")
-                            {
-                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 30, kns.MB16Ds[0].DI[7]);//поплавок Аварийно высокий
-                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 28, kns.MB16Ds[0].DI[8]); //поплавок средний
-                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 26, kns.MB16Ds[0].DI[4]); //поплавок Ниже-нижнего НН
-                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 27, kns.MB16Ds[0].DI[5]); //поплавок Ниже-нижнего НН
-                            }
-                        /////////////////////////////
+                        
                         ///////////////Маргелова//////////////
                         else if (kns.KNSId == "KNS24")
                         {
@@ -276,7 +293,7 @@ namespace OutReader.Helper
                 }
 
                 query += MB8AsQuery(kns.LastUpdate, kns.KNSId, kns.MB8As);
-                
+
                 query += TERsQuery(kns.LastUpdate, kns.KNSId, kns.TERs);
 
                 if (kns.SBIs != null && kns.SBIs.Count > 0)
@@ -298,8 +315,11 @@ namespace OutReader.Helper
                     }   
             }
 
-            query += getQueryKNS ( kns.LastUpdate, kns.KNSId, 65, false );//нет связи
-            GetDataSet ( query );
+            if (kns.KNSId == "KNS18")
+            {
+                query += getQueryKNS(kns.LastUpdate, kns.KNSId, 65, false);//нет связи
+                GetDataSet(query);
+            }
         }
         public static void SetKNSAlehinaAlarm ( string knsId )
         {
@@ -337,6 +357,7 @@ namespace OutReader.Helper
             return list;
         }
 
+       
         private static string MB8AsQuery ( DateTime lastUpdate, string knsId, List<MB8A> mb8As )
         {
             var query = "";
@@ -378,7 +399,36 @@ namespace OutReader.Helper
 
             return query;
         }
-
+        private static string getQueryOBEH(DateTime dt, string id, int alarm_id, bool value)
+        {
+            return string.Format("IF NOT EXISTS(SELECT * FROM teleskop_di WHERE ID IN(SELECT MAX(Id) FROM teleskop_di WHERE TeleskopId = '{1}' AND AlarmId = {2}) AND IsEnabled={3}) " +
+                    "INSERT INTO teleskop_di (Sysdate, TeleskopId, AlarmId, IsEnabled) VALUES('{0}','{1}', {2}, {3});\r\n", dt, id, alarm_id, value ? 1 : 0);
+        }
+        private static string getQueryOBEH_2(DateTime dt, string id, int alarm_id, bool value)
+        {
+            return string.Format("IF NOT EXISTS(SELECT * FROM teleskop_di WHERE ID IN(SELECT MAX(Id) FROM teleskop_di WHERE TeleskopId = '{1}' AND AlarmId = {2}) AND IsEnabled={3}) " +
+                    "INSERT INTO teleskop_di (Sysdate, TeleskopId, AlarmId, IsEnabled) VALUES('{0}','{1}', {2}, {3});\r\n", dt, id, alarm_id, value ? 1 : 0);
+        }
+        private static string getQueryOBEH_3(DateTime dt, string id, int alarm_id, bool value)
+        {
+            return string.Format("IF NOT EXISTS(SELECT * FROM teleskop_di WHERE ID IN(SELECT MAX(Id) FROM teleskop_di WHERE TeleskopId = '{1}' AND AlarmId = {2}) AND IsEnabled={3}) " +
+                    "INSERT INTO teleskop_di (Sysdate, TeleskopId, AlarmId, IsEnabled) VALUES('{0}','{1}', {2}, {3});\r\n", dt, id, alarm_id, value ? 1 : 0);
+        }
+        private static string getQueryOBEH_VRU(DateTime dt, string id, int alarm_id, bool value)
+        {
+            return string.Format("IF NOT EXISTS(SELECT * FROM teleskop_di WHERE ID IN(SELECT MAX(Id) FROM teleskop_di WHERE TeleskopId = '{1}' AND AlarmId = {2}) AND IsEnabled={3}) " +
+                    "INSERT INTO teleskop_di (Sysdate, TeleskopId, AlarmId, IsEnabled) VALUES('{0}','{1}', {2}, {3});\r\n", dt, id, alarm_id, value ? 1 : 0);
+        }
+        private static string getQueryOBEH_Alarm(DateTime dt, string id, int alarm_id, bool value)
+        {
+            return string.Format("IF NOT EXISTS(SELECT * FROM teleskop_di WHERE ID IN(SELECT MAX(Id) FROM teleskop_di WHERE TeleskopId = '{1}' AND AlarmId = {2}) AND IsEnabled={3}) " +
+                    "INSERT INTO teleskop_di (Sysdate, TeleskopId, AlarmId, IsEnabled) VALUES('{0}','{1}', {2}, {3});\r\n", dt, id, alarm_id, value ? 1 : 0);
+        }
+        private static string getQueryOBEH_level(DateTime dt, string id, int alarm_id, bool value)
+        {
+            return string.Format("IF NOT EXISTS(SELECT * FROM teleskop_di WHERE ID IN(SELECT MAX(Id) FROM teleskop_di WHERE TeleskopId = '{1}' AND AlarmId = {2}) AND IsEnabled={3}) " +
+                    "INSERT INTO teleskop_di (Sysdate, TeleskopId, AlarmId, IsEnabled) VALUES('{0}','{1}', {2}, {3});\r\n", dt, id, alarm_id, value ? 1 : 0);
+        }
         private static string getQueryKNS ( DateTime dt, string id, int alarm_id, bool value )
         {
             return string.Format ( "IF NOT EXISTS(SELECT * FROM teleskop_di WHERE ID IN(SELECT MAX(Id) FROM teleskop_di WHERE TeleskopId = '{1}' AND AlarmId = {2}) AND IsEnabled={3}) " +
