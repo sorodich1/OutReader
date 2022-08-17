@@ -526,9 +526,9 @@ namespace OutReader.Model.LiftWater
         {
             var lwps = new List<LiftWaterPump>();
             var is1221 = ConverterHelper.ByteToBools(bytes[0]);
-            //var is1222 = ConverterHelper.ByteToBools(bytes[4]);
-            //var is1223 = ConverterHelper.ByteToBools(bytes[8]);
-            //var is1224 = ConverterHelper.ByteToBools(bytes[12]);
+            var is1222 = ConverterHelper.ByteToBools(bytes[4]);
+            var is1223 = ConverterHelper.ByteToBools(bytes[8]);
+            var is1224 = ConverterHelper.ByteToBools(bytes[12]);
 
             var speed1f = 0.0;
             var speed1 = ConverterHelper.ByteToInt16(bytes[3]);
@@ -538,13 +538,13 @@ namespace OutReader.Model.LiftWater
             var time1 = ConverterHelper.ByteToReal(bytes[1], bytes[2]);
             if (float.IsNaN(time1)) time1 = 0;
 
-            //var speed2f = 0.0;
-            //var speed2 = ConverterHelper.ByteToInt16(bytes[7]);
-            //if (speed2 == -1) speed2f = -1;
-            //else if (speed2 == 0) speed2f = 0;
-            //else speed2f = speed2 * 0.01 / 2;
-            //var time2 = ConverterHelper.ByteToReal(bytes[5], bytes[6]);
-            //if (float.IsNaN(time2)) time2 = 0;
+            var speed2f = 0.0;
+            var speed2 = ConverterHelper.ByteToInt16(bytes[7]);
+            if (speed2 == -1) speed2f = -1;
+            else if (speed2 == 0) speed2f = 0;
+            else speed2f = speed2 * 0.01 / 2;
+            var time2 = ConverterHelper.ByteToReal(bytes[5], bytes[6]);
+            if (float.IsNaN(time2)) time2 = 0;
 
             //var speed3f = 0.0;
             //var speed3 = ConverterHelper.ByteToInt16(bytes[11]);
@@ -582,26 +582,26 @@ namespace OutReader.Model.LiftWater
                     }
                 }
             });
-            //lwps.Add(new LiftWaterPump()
-            //{
-            //    Id = 3,
-            //    Title = "12.2.2",
-            //    LiftWaterPumpDatas = new List<LiftWaterPumpData>()
-            //    {
-            //        new LiftWaterPumpData()
-            //        {
-            //            IsAccessMode = is1222[0],
-            //            IsActive = is1222[1],
-            //            IsPumpAlarm = is1222[2],
-            //            AlarmCode = new byte[] {bytes[4][1]},
-            //            OperationTime =Convert.ToDecimal(time2),
-            //            Speed =  Convert.ToInt32(speed2f),
-            //            Sysdate = dt, 
-            //            PumpId = 3,
-            //            IsCommFault = is1222[3]
-            //        }
-            //    }
-            //});
+            lwps.Add(new LiftWaterPump()
+            {
+                Id = 3,
+                Title = "12.2.2",
+                LiftWaterPumpDatas = new List<LiftWaterPumpData>()
+                {
+                    new LiftWaterPumpData()
+                    {
+                        IsAccessMode = is1222[0],
+                        IsActive = is1222[1],
+                        IsPumpAlarm = is1222[2],
+                        AlarmCode = new byte[] {bytes[4][1]},
+                        OperationTime =Convert.ToDecimal(time2),
+                        Speed =  Convert.ToInt32(speed2f),
+                        Sysdate = dt,
+                        PumpId = 3,
+                        IsCommFault = is1222[3]
+                    }
+                }
+            });
             //lwps.Add(new LiftWaterPump()
             //{
             //    Id = 4,

@@ -357,20 +357,41 @@ namespace OutReader.Helper
             }
             return mb;
         }
+        public static MB8A_KRESTY ReadMB8A_KRESTY(TcpClient client, int modbusId = 16)
+        {
+            MB8A_KRESTY mb = null;
+            try
+            {
+                mb = new MB8A_KRESTY();
+                //mb.A1 = MBAnalog(client, modbusId, new byte[] { 0, 4 });
+                //mb.A2 = MBAnalog(client, modbusId, new byte[] { 0, 10 });
+                //mb.A3 = MBAnalog(client, modbusId, new byte[] { 0, 16 });
+                //mb.A4 = MBAnalog(client, modbusId, new byte[] { 0, 22 });
+                //mb.A5 = MBAnalog(client, modbusId, new byte[] { 0, 28 });
+                mb.A6 = MBAnalog(client, modbusId, new byte[] { 2, 23 });
+                //mb.A7 = MBAnalog(client, modbusId, new byte[] { 0, 40 });
+                //mb.A8 = MBAnalog(client, modbusId, new byte[] { 0, 46 });
+            }
+            catch (Exception ex)
+            {
+                var zz = ex;
+            }
+            return mb;
+        }
         public static MB8A_OBEH ReadMB8A_OBEH(TcpClient client, int modbusId = 1)
         {
             MB8A_OBEH mb = null;
             try
             {
                 mb = new MB8A_OBEH();
-                mb.A1 = MBAnalog(client, modbusId, new byte[] { 0, 4 });
-                mb.A2 = MBAnalog(client, modbusId, new byte[] { 0, 10 });
-                mb.A3 = MBAnalog(client, modbusId, new byte[] { 0, 16 });
-                mb.A4 = MBAnalog(client, modbusId, new byte[] { 0, 22 });
-                mb.A5 = MBAnalog(client, modbusId, new byte[] { 0, 28 });
-                mb.A6 = MBAnalog(client, modbusId, new byte[] { 0, 34 });
-                mb.A7 = MBAnalog(client, modbusId, new byte[] { 0, 40 });
-                mb.A8 = MBAnalog(client, modbusId, new byte[] { 0, 46 });
+                mb.A1 = MBAnalog_OBEH(client, modbusId, new byte[] { 0, 15 });
+                mb.A2 = MBAnalog_OBEH(client, modbusId, new byte[] { 0, 18 });
+                mb.A3 = MBAnalog_OBEH(client, modbusId, new byte[] { 0, 21 });
+                mb.A4 = MBAnalog(client, modbusId, new byte[] { 0, 37 });
+                mb.A5 = MBAnalog(client, modbusId, new byte[] { 0, 39 });
+                //mb.A6 = MBAnalog(client, modbusId, new byte[] { 0, 0 });
+                //mb.A7 = MBAnalog(client, modbusId, new byte[] { 0, 0 });
+                //mb.A8 = MBAnalog(client, modbusId, new byte[] { 0, 0 });
             }
             catch (Exception ex)
             {
@@ -507,6 +528,34 @@ namespace OutReader.Helper
                 return -1;
             }
         }
+        private static int MBAnalog_OBEH(TcpClient client, int modbusId, byte[] address)
+        {
+            try
+            {
+                var vt = new byte[] { (byte)modbusId, 0x03, address[0], address[1], 0x00, 0x01, 0, 0 };
+                var crc = BitConverter.GetBytes(ModRTU_CRC(vt, 6));
+                vt[6] = crc[0];
+                vt[7] = crc[1];
+                //Sending the byte array to the server
+                client.Client.Send(vt);
+                //Get the network stream
+                NetworkStream stream = client.GetStream();
+                byte[] buffer = new byte[8];
+                int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                var ai = BitConverter.ToInt16(new byte[]
+                {
+                    buffer[4], buffer[3]
+                }, 0);
+                if (ai < 0) ai = 0;
+                return ai;
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+
+
 
         public static PR200 ReadPR200(TcpClient client, int modbusId)
         {

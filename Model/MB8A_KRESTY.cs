@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace OutReader.Model
 {
-    public class MB8A_OBEH
+    public class MB8A_KRESTY
     {
-        public MB8A_OBEH() { }
-        public MB8A_OBEH(int ai1, int ai2, int ai3, decimal ai4, decimal ai5, decimal ai6, decimal ai7, decimal ai8)
+        public MB8A_KRESTY() { }
+        public MB8A_KRESTY(decimal ai1, decimal ai2, decimal ai3, decimal ai4, decimal ai5, decimal ai6, decimal ai7, decimal ai8)
         {
             A1 = ai1;
             A2 = ai2;
@@ -21,9 +21,9 @@ namespace OutReader.Model
             A7 = ai7;
             A8 = ai8;
         }        
-        public int A1 { get; set; }
-        public int A2 { get; set; }
-        public int A3 { get; set; }
+        public decimal A1 { get; set; }
+        public decimal A2 { get; set; }
+        public decimal A3 { get; set; }
         public decimal A4 { get; set; }
         public decimal A5 { get; set; }
         public decimal A6 { get; set; }

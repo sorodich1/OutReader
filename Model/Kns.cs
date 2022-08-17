@@ -26,6 +26,7 @@ namespace OutReader.Model
             MB16Ds = new List<MB16D>();
             MB8As = new List<MB8A>();
             MB8A_OBEHs = new List<MB8A_OBEH>();
+            MB8A_KRESTYs = new List<MB8A_KRESTY>();
             TERs = new List<TER>();
             OBEHs = new List<OBEH>();
             OBEH_2s = new List<OBEH_2>();
@@ -44,6 +45,7 @@ namespace OutReader.Model
             Devices = new List<KnsDevice>();
             MB16Ds = new List<MB16D>();
             MB8As = new List<MB8A>();
+            MB8A_KRESTYs = new List<MB8A_KRESTY>();
             MB8A_OBEHs = new List<MB8A_OBEH>();
             TERs = new List<TER>();
             SBIs = new List<SBI>();
@@ -57,6 +59,7 @@ namespace OutReader.Model
         }
         public MB16D MB16D { get; private set; }
         public MB8A MB8A { get; private set; }
+        public MB8A_KRESTY MB8A_KRESTY { get; private set; }
         public MB8A_OBEH MB8A_OBEH { get; private set; }
         public Tn Tn { get; set; }
         public ME3M ME3M { get; set; }
@@ -71,6 +74,7 @@ namespace OutReader.Model
         public List<KnsDevice> Devices { get; set; }
         public List<MB16D> MB16Ds { get; private set; }
         public List<MB8A> MB8As { get; private set; }
+        public List<MB8A_KRESTY> MB8A_KRESTYs { get; private set; }
         public List<MB8A_OBEH> MB8A_OBEHs { get; private set; }
         public List<TER> TERs { get; private set; }
         public List<SBI> SBIs { get; private set; }
@@ -177,6 +181,14 @@ namespace OutReader.Model
                                 MB8As.Add(mb8a);
                             }
                         }
+                        else if (device.IsMB8A_KRESTY)
+                        {
+                            var mb8a_kresty = ModbusHelper.ReadMB8A_KRESTY(client, device.ModbusId);
+                            if (mb8a_kresty != null)
+                            {
+                                MB8A_KRESTYs.Add(mb8a_kresty);
+                            }
+                        }
                         else if (device.IsMB8A_OBEH)
                         {
                             var mb8a_obeh = ModbusHelper.ReadMB8A_OBEH(client, device.ModbusId);
@@ -258,6 +270,10 @@ namespace OutReader.Model
             {
                 ScadaHelper.SetKnsPress(MB8As[0].A5, KNSId, Tn);
             }
+            else if (KNSId == "KNS18" && string.IsNullOrEmpty(ExceptionMessage))
+            {
+                ScadaHelper.SetKnsPress(MB8A_OBEHs[0].A5, KNSId, Tn);
+            }
         }
 
         public override string ToString()
@@ -266,6 +282,8 @@ namespace OutReader.Model
 
             if (MB8As != null && MB8As.Count > 0)
                 res += string.Format("MB8As:({0}) ", string.Join(" ", MB8As));
+            if (MB8A_KRESTYs != null && MB8A_KRESTYs.Count > 0)
+                res += string.Format("MB8A_KRESTYs:({0}) ", string.Join(" ", MB8A_KRESTYs));
             if (MB8A_OBEHs != null && MB8A_OBEHs.Count > 0)
                 res += string.Format("MB8A_OBEHs:({0}) ", string.Join(" ", MB8A_OBEHs));
             if (OBEHs != null && OBEHs.Count > 0)

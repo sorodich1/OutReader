@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>49</ApplicationRevision>
+    <ApplicationRevision>50</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -103,6 +103,7 @@
     <Compile Include="Model\GeoKiseleva.cs" />
     <Compile Include="Model\Kns.cs" />
     <Compile Include="Model\KnsDevice.cs" />
+    <Compile Include="Model\MB8A_KRESTY.cs" />
     <Compile Include="Model\MB8A_OBEH.cs" />
     <Compile Include="Model\OBEH_level.cs" />
     <Compile Include="Model\OBEH_Alarm.cs" />
