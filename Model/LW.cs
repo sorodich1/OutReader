@@ -122,28 +122,28 @@ namespace OutReader.Model
                 Thread.Sleep ( 700 );
                 var bytes203 = ModbusHelper.ReadRegisters ( 203, 7 );
                 ModbusHelper.GetTempWellPumpData ( Wells, bytes203.GetRange ( 0, 7 ) );
-                //try
-                //{
-                //    //PromEnergo
-                //    ModbusHelper.IP = ipEnergo;
-                //    var bEnergoPressSet = ModbusHelper.ReadRegisters(32, 2);
-                //    var bEnergoData = ModbusHelper.ReadRegisters(2059, 7);
-                //    var bEnergoAlarm = ModbusHelper.ReadRegisters(1200, 3);
-                //    Thread.Sleep(200);
-                //    var bEnergoWarning = ModbusHelper.ReadRegisters(1300, 2);
-                //    var bEnergoStatePump = ModbusHelper.ReadRegisters(2000, 8);
-                //    var lf2 = ModbusHelper.GetLiftWaterPumpsPromEnergo(bEnergoData, bEnergoStatePump, bEnergoAlarm,
-                //        bEnergoWarning, dt);
-                //    StationPumps.AddRange(lf2);
-                //    LiftWaterStatus.IsActive = StationPumps.Any(x => x.LiftWaterPumpDatas.Any(z => z.IsActive));
-                //    LiftWaterStatus.IsAlarm = StationPumps.All(x => x.LiftWaterPumpDatas.Any(z => z.IsPumpAlarm));
-                //    LiftWaterStatus.IsWarning = LiftWaterStatus.IsWarning || StationPumps.Any(x =>
-                //                            x.LiftWaterPumpDatas.Any(
-                //                                z => z.WarningCode != null && z.WarningCode.Any(p => Convert.ToInt32(p) > 0)));
-                //    LiftWaterStatus.PressSetPoint = LiftWater.ConverterHelper.ByteToReal(bEnergoPressSet[1], bEnergoPressSet[0]);
-                //    LiftWaterStatus.IsAccessMode = StationPumps.Any(x => x.LiftWaterPumpDatas.Any(z => z.IsAccessMode));
-                //}
-                //catch (Exception ex) { ExceptionMessage += DateTime.Now.ToString("G") + "- не доступен " + ipEnergo + "!!!"; }
+                try
+                {
+                    //PromEnergo
+                    ModbusHelper.IP = ipEnergo;
+                    var bEnergoPressSet = ModbusHelper.ReadRegisters(32, 2);
+                    var bEnergoData = ModbusHelper.ReadRegisters(2059, 7);
+                    var bEnergoAlarm = ModbusHelper.ReadRegisters(1200, 3);
+                    Thread.Sleep(200);
+                    var bEnergoWarning = ModbusHelper.ReadRegisters(1300, 2);
+                    var bEnergoStatePump = ModbusHelper.ReadRegisters(2000, 8);
+                    var lf2 = ModbusHelper.GetLiftWaterPumpsPromEnergo(bEnergoData, bEnergoStatePump, bEnergoAlarm,
+                        bEnergoWarning, dt);
+                    StationPumps.AddRange(lf2);
+                    LiftWaterStatus.IsActive = StationPumps.Any(x => x.LiftWaterPumpDatas.Any(z => z.IsActive));
+                    LiftWaterStatus.IsAlarm = StationPumps.All(x => x.LiftWaterPumpDatas.Any(z => z.IsPumpAlarm));
+                    LiftWaterStatus.IsWarning = LiftWaterStatus.IsWarning || StationPumps.Any(x =>
+                                            x.LiftWaterPumpDatas.Any(
+                                                z => z.WarningCode != null && z.WarningCode.Any(p => Convert.ToInt32(p) > 0)));
+                    LiftWaterStatus.PressSetPoint = LiftWater.ConverterHelper.ByteToReal(bEnergoPressSet[1], bEnergoPressSet[0]);
+                    LiftWaterStatus.IsAccessMode = StationPumps.Any(x => x.LiftWaterPumpDatas.Any(z => z.IsAccessMode));
+                }
+                catch (Exception ex) { ExceptionMessage += DateTime.Now.ToString("G") + "- не доступен " + ipEnergo + "!!!"; }
 
                 Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
                 var query = "";

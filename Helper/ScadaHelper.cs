@@ -934,7 +934,8 @@ namespace OutReader.Helper
 
         //                    var tags = teplo.GetChild("Tags");
 
-        //                    var pressTag = tags.GetChild("Press");
+        //                    var
+        //                    Tag = tags.GetChild("Press");
         //                    var flowDate = Convert.ToDateTime(pressTag["CurrentTime"].ToString());
 
         //                    if (flowDate != teploset.Date)

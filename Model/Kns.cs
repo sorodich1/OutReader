@@ -27,6 +27,7 @@ namespace OutReader.Model
             MB8As = new List<MB8A>();
             MB8A_OBEHs = new List<MB8A_OBEH>();
             MB8A_KRESTYs = new List<MB8A_KRESTY>();
+            MB8A_GKNSs = new List<MB8A_GKNS>();
             TERs = new List<TER>();
             OBEHs = new List<OBEH>();
             OBEH_2s = new List<OBEH_2>();
@@ -34,6 +35,10 @@ namespace OutReader.Model
             OBEH_VRUs = new List<OBEH_VRU>();
             OBEH_Alarms = new List<OBEH_Alarm>();
             OBEH_levels = new List<OBEH_level>();
+            GKNSs = new List<GKNS>();
+            GKNS_2s = new List<GKNS_2>();
+            GKNS_3s = new List<GKNS_3>();
+            GKNS_4s = new List<GKNS_4>();
         }
 
         public Kns(int port, string ip, string id, string title)
@@ -46,6 +51,7 @@ namespace OutReader.Model
             MB16Ds = new List<MB16D>();
             MB8As = new List<MB8A>();
             MB8A_KRESTYs = new List<MB8A_KRESTY>();
+            MB8A_GKNSs = new List<MB8A_GKNS>();
             MB8A_OBEHs = new List<MB8A_OBEH>();
             TERs = new List<TER>();
             SBIs = new List<SBI>();
@@ -56,10 +62,15 @@ namespace OutReader.Model
             OBEH_VRUs = new List<OBEH_VRU>();
             OBEH_Alarms = new List<OBEH_Alarm>();
             OBEH_levels = new List<OBEH_level>();
+            GKNSs = new List<GKNS>();
+            GKNS_2s = new List<GKNS_2>();
+            GKNS_3s = new List<GKNS_3>();
+            GKNS_4s = new List<GKNS_4>();
         }
         public MB16D MB16D { get; private set; }
         public MB8A MB8A { get; private set; }
         public MB8A_KRESTY MB8A_KRESTY { get; private set; }
+        public MB8A_GKNS MB8A_GKNS { get; private set; }
         public MB8A_OBEH MB8A_OBEH { get; private set; }
         public Tn Tn { get; set; }
         public ME3M ME3M { get; set; }
@@ -69,12 +80,17 @@ namespace OutReader.Model
         public OBEH_VRU OBEH_VRU { get; set; }
         public OBEH_Alarm OBEH_Alarm { get; set; }
         public OBEH_level OBEH_level { get; set; }
+        public GKNS GKNS { get; set; }
+        public GKNS_2 GKNS_2 { get; set; }
+        public GKNS_3 GKNS_3 { get; set; }
+        public GKNS_4 GKNS_4 { get; set; }
 
         public string KNSId { get { return _id; } }
         public List<KnsDevice> Devices { get; set; }
         public List<MB16D> MB16Ds { get; private set; }
         public List<MB8A> MB8As { get; private set; }
         public List<MB8A_KRESTY> MB8A_KRESTYs { get; private set; }
+        public List<MB8A_GKNS> MB8A_GKNSs { get; private set; }
         public List<MB8A_OBEH> MB8A_OBEHs { get; private set; }
         public List<TER> TERs { get; private set; }
         public List<SBI> SBIs { get; private set; }
@@ -85,12 +101,16 @@ namespace OutReader.Model
         public List<OBEH_VRU> OBEH_VRUs { get; private set; }
         public List<OBEH_Alarm> OBEH_Alarms { get; private set; }
         public List<OBEH_level> OBEH_levels { get; private set; }
+        public List<GKNS> GKNSs { get; private set; }
+        public List<GKNS_2> GKNS_2s { get; private set; }
+        public List<GKNS_3> GKNS_3s { get; private set; }
+        public List<GKNS_4> GKNS_4s { get; private set; }
 
         public override bool NotConnection { get { return MB16D==null || IsExceptionClient; } }
 
         public override void SaveToSql ()
         {
-            if (MB8As.Count > 0 || MB16Ds.Count > 0 || OBEHs.Count > 0 || OBEH_2s.Count > 0 || OBEH_3s.Count > 0 || OBEH_VRUs.Count > 0 || OBEH_Alarms.Count > 0 || OBEH_levels.Count > 0)
+            if (MB8As.Count > 0 || MB16Ds.Count > 0 || OBEHs.Count > 0 || OBEH_2s.Count > 0 || OBEH_3s.Count > 0 || OBEH_VRUs.Count > 0 || OBEH_Alarms.Count > 0 || OBEH_levels.Count > 0 || GKNSs.Count > 0 || GKNS_2s.Count > 0 || GKNS_3s.Count > 0 || GKNS_4s.Count > 0)
             {
 
                 DbHelper.SetKns ( this );
@@ -173,6 +193,38 @@ namespace OutReader.Model
                                 OBEH_levels.Add(obeh_level);
                             }
                         }
+                        else if (device.IsGKNS) //true
+                        {
+                            var gkns = ModbusHelper.ReadGKNS(client, device.ModbusId);
+                            if (gkns != null)
+                            {
+                                GKNSs.Add(gkns);
+                            }
+                        }
+                        else if (device.IsGKNS_2) //true
+                        {
+                            var gkns_2 = ModbusHelper.ReadGKNS_2(client, device.ModbusId);
+                            if (gkns_2 != null)
+                            {
+                                GKNS_2s.Add(gkns_2);
+                            }
+                        }
+                        else if (device.IsGKNS_3) //true
+                        {
+                            var gkns_3 = ModbusHelper.ReadGKNS_3(client, device.ModbusId);
+                            if (gkns_3 != null)
+                            {
+                                GKNS_3s.Add(gkns_3);
+                            }
+                        }
+                        else if (device.IsGKNS_4) //true
+                        {
+                            var gkns_4 = ModbusHelper.ReadGKNS_4(client, device.ModbusId);
+                            if (gkns_4 != null)
+                            {
+                                GKNS_4s.Add(gkns_4);
+                            }
+                        }
                         else if (device.IsMB8A)
                         {
                             var mb8a = ModbusHelper.ReadM8A(client, device.ModbusId);
@@ -187,6 +239,14 @@ namespace OutReader.Model
                             if (mb8a_kresty != null)
                             {
                                 MB8A_KRESTYs.Add(mb8a_kresty);
+                            }
+                        }
+                        else if (device.IsMB8A_GKNS)
+                        {
+                            var mb8a_gkns = ModbusHelper.ReadMB8A_GKNS(client, device.ModbusId);
+                            if (mb8a_gkns != null)
+                            {
+                                MB8A_GKNSs.Add(mb8a_gkns);
                             }
                         }
                         else if (device.IsMB8A_OBEH)
@@ -284,6 +344,8 @@ namespace OutReader.Model
                 res += string.Format("MB8As:({0}) ", string.Join(" ", MB8As));
             if (MB8A_KRESTYs != null && MB8A_KRESTYs.Count > 0)
                 res += string.Format("MB8A_KRESTYs:({0}) ", string.Join(" ", MB8A_KRESTYs));
+            if (MB8A_GKNSs != null && MB8A_GKNSs.Count > 0)
+                res += string.Format("MB8A_GKNSs:({0}) ", string.Join(" ", MB8A_GKNSs));
             if (MB8A_OBEHs != null && MB8A_OBEHs.Count > 0)
                 res += string.Format("MB8A_OBEHs:({0}) ", string.Join(" ", MB8A_OBEHs));
             if (OBEHs != null && OBEHs.Count > 0)
@@ -298,6 +360,14 @@ namespace OutReader.Model
                 res += string.Format("OBEH_Alarm:({0}) ", string.Join(" ", OBEH_Alarms));
             if (OBEH_levels != null && OBEH_levels.Count > 0)
                 res += string.Format("OBEH_level:({0}) ", string.Join(" ", OBEH_levels));
+            if (GKNSs != null && GKNSs.Count > 0)
+                res += string.Format("GKNS:({0}) ", string.Join(" ", GKNSs));
+            if (GKNS_2s != null && GKNS_2s.Count > 0)
+                res += string.Format("GKNS_2:({0}) ", string.Join(" ", GKNS_2s));
+            if (GKNS_3s != null && GKNS_3s.Count > 0)
+                res += string.Format("GKNS_3:({0}) ", string.Join(" ", GKNS_3s));
+            if (GKNS_4s != null && GKNS_4s.Count > 0)
+                res += string.Format("GKNS_4:({0}) ", string.Join(" ", GKNS_4s));
 
             if (TERs != null && TERs.Count > 0)
                 res += string.Format("TERs:({0}) ", string.Join(" ", TERs));

@@ -267,6 +267,122 @@ namespace OutReader.Helper
             }
             return mb;
         }
+        public static GKNS ReadGKNS(TcpClient client, int modbusId = 1)
+        {
+            GKNS mb = null;
+            try
+            {
+                var vt = new byte[] { (byte)modbusId, 0x03, 0x00, 0x36, 0x00, 0x01, 0, 0 };
+                var crc = BitConverter.GetBytes(ModRTU_CRC(vt, 6));
+                vt[6] = crc[0];
+                vt[7] = crc[1];
+                //Sending the byte array to the server
+                client.Client.Send(vt);
+                //Get the network stream
+                NetworkStream stream = client.GetStream();
+                byte[] buffer = new byte[8];
+                int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                var res = BitConverter.ToInt16(
+                        new byte[]
+                        {
+                            buffer[4], buffer[3]
+                        }, 0);
+
+                mb = new GKNS(res);
+            }
+            catch (Exception ex)
+            {
+                var zz = ex;
+            }
+            return mb;
+        }
+        public static GKNS_2 ReadGKNS_2(TcpClient client, int modbusId = 1)
+        {
+            GKNS_2 mb = null;
+            try
+            {
+                var vt = new byte[] { (byte)modbusId, 0x03, 0x00, 0x37, 0x00, 0x01, 0, 0 };
+                var crc = BitConverter.GetBytes(ModRTU_CRC(vt, 6));
+                vt[6] = crc[0];
+                vt[7] = crc[1];
+                //Sending the byte array to the server
+                client.Client.Send(vt);
+                //Get the network stream
+                NetworkStream stream = client.GetStream();
+                byte[] buffer = new byte[8];
+                int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                var res = BitConverter.ToInt16(
+                        new byte[]
+                        {
+                            buffer[4], buffer[3]
+                        }, 0);
+
+                mb = new GKNS_2(res);
+            }
+            catch (Exception ex)
+            {
+                var zz = ex;
+            }
+            return mb;
+        }
+        public static GKNS_3 ReadGKNS_3(TcpClient client, int modbusId = 1)
+        {
+            GKNS_3 mb = null;
+            try
+            {
+                var vt = new byte[] { (byte)modbusId, 0x03, 0x00, 0x38, 0x00, 0x01, 0, 0 };
+                var crc = BitConverter.GetBytes(ModRTU_CRC(vt, 6));
+                vt[6] = crc[0];
+                vt[7] = crc[1];
+                //Sending the byte array to the server
+                client.Client.Send(vt);
+                //Get the network stream
+                NetworkStream stream = client.GetStream();
+                byte[] buffer = new byte[8];
+                int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                var res = BitConverter.ToInt16(
+                        new byte[]
+                        {
+                            buffer[4], buffer[3]
+                        }, 0);
+
+                mb = new GKNS_3(res);
+            }
+            catch (Exception ex)
+            {
+                var zz = ex;
+            }
+            return mb;
+        }
+        public static GKNS_4 ReadGKNS_4(TcpClient client, int modbusId = 1)
+        {
+            GKNS_4 mb = null;
+            try
+            {
+                var vt = new byte[] { (byte)modbusId, 0x03, 0x00, 0x39, 0x00, 0x01, 0, 0 };
+                var crc = BitConverter.GetBytes(ModRTU_CRC(vt, 6));
+                vt[6] = crc[0];
+                vt[7] = crc[1];
+                //Sending the byte array to the server
+                client.Client.Send(vt);
+                //Get the network stream
+                NetworkStream stream = client.GetStream();
+                byte[] buffer = new byte[8];
+                int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                var res = BitConverter.ToInt16(
+                        new byte[]
+                        {
+                            buffer[4], buffer[3]
+                        }, 0);
+
+                mb = new GKNS_4(res);
+            }
+            catch (Exception ex)
+            {
+                var zz = ex;
+            }
+            return mb;
+        }
         public static decimal ReadMass(TcpClient client)
         {
             try
@@ -378,6 +494,27 @@ namespace OutReader.Helper
             }
             return mb;
         }
+        public static MB8A_GKNS ReadMB8A_GKNS(TcpClient client, int modbusId = 1)
+        {
+            MB8A_GKNS mb = null;
+            try
+            {
+                mb = new MB8A_GKNS();
+                mb.A1 = MBAnalog(client, modbusId, new byte[] { 1, 245/*245*/ });
+                mb.A2 = MBAnalog(client, modbusId, new byte[] { 1, 247/*247*/ });
+                mb.A3 = MBAnalog(client, modbusId, new byte[] { 1, 249 });
+                mb.A4 = MBAnalog(client, modbusId, new byte[] { 1, 251/*251*/ });
+                //mb.A5 = MBAnalog(client, modbusId, new byte[] { 0, 28 });
+                mb.A6 = MBAnalog(client, modbusId, new byte[] { 1, 207 });
+                mb.A7 = MBAnalog(client, modbusId, new byte[] { 1, 191 });
+                mb.A8 = MBAnalog(client, modbusId, new byte[] { 1, 205 });
+            }
+            catch (Exception ex)
+            {
+                var zz = ex;
+            }
+            return mb;
+        }
         public static MB8A_OBEH ReadMB8A_OBEH(TcpClient client, int modbusId = 1)
         {
             MB8A_OBEH mb = null;
@@ -389,8 +526,8 @@ namespace OutReader.Helper
                 mb.A3 = MBAnalog_OBEH(client, modbusId, new byte[] { 0, 21 });
                 mb.A4 = MBAnalog(client, modbusId, new byte[] { 0, 37 });
                 mb.A5 = MBAnalog(client, modbusId, new byte[] { 0, 39 });
-                //mb.A6 = MBAnalog(client, modbusId, new byte[] { 0, 0 });
-                //mb.A7 = MBAnalog(client, modbusId, new byte[] { 0, 0 });
+                mb.A6 = MBAnalog(client, modbusId, new byte[] { 0, 41 });
+                mb.A7 = MBAnalog(client, modbusId, new byte[] { 0, 43 });
                 //mb.A8 = MBAnalog(client, modbusId, new byte[] { 0, 0 });
             }
             catch (Exception ex)

@@ -21,6 +21,7 @@ namespace OutReader.Model
         }
         public bool IsMB8A { get { return Name == "MB8A"; } }
         public bool IsMB8A_KRESTY { get { return Name == "MB8A_KRESTY"; } }
+        public bool IsMB8A_GKNS { get { return Name == "MB8A_GKNS"; } }
         public bool IsMB8A_OBEH { get { return Name == "MB8A_OBEH"; } }
         public bool IsOBEH { get { return Name == "OBEH"; } } //true
         public bool IsOBEH_2 { get { return Name == "OBEH_2"; } } //true
@@ -28,6 +29,11 @@ namespace OutReader.Model
         public bool IsOBEH_VRU { get { return Name == "OBEH_VRU"; } } //true
         public bool IsOBEH_Alarm { get { return Name == "OBEH_Alarm"; } } //true
         public bool IsOBEH_level { get { return Name == "OBEH_level"; } } //true
+        public bool IsGKNS { get { return Name == "GKNS"; } }
+        public bool IsGKNS_2 { get { return Name == "GKNS_2"; } }
+        public bool IsGKNS_3 { get { return Name == "GKNS_3"; } }
+        public bool IsGKNS_4 { get { return Name == "GKNS_4"; } }
+
 
         public bool IsTER { get { return Name == "TER"; } }
         public bool IsMR { get { return Name == "MR"; } }
