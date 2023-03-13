@@ -35,7 +35,9 @@ namespace OutReader.Model
         public List<KNSPump> KnsPumps { get; set; }
         public List<Valve> Valves { get; set; }
         public List<PSHU> Pshus { get; set; }
-        private string Query { get; set; }
+        public List<PSHU_NEW> Pshu_news { get; set; }
+        //public List<cds> cds { get; set; }
+    private string Query { get; set; }
 
 
         public void Run()
@@ -73,7 +75,7 @@ namespace OutReader.Model
             {
                 //WinSCPHelper.Download();
                 ModbusHelper.IP = OutReader.Properties.Config.Default.LiftWaterIp;
-                //ModbusHelper.IPOWEN = OutReader.Properties.Config.Default.OwenLiftWaterIp;
+                ModbusHelper.IPOWEN = OutReader.Properties.Config.Default.OwenLiftWaterIp;
                 var ipEnergo = "192.168.22.149";
                 var dt = DateTime.Now;
 
@@ -91,11 +93,17 @@ namespace OutReader.Model
                 Valves = ModbusHelper.GetValves ( bytes55_100.GetRange ( 39, 10 ), dt );
                 Thread.Sleep ( 700 );
                 var bytes101_151 = ModbusHelper.ReadRegisters ( 101, 55 );
-                Pshus = ModbusHelper.GetPSHUs ( bytes101_151.GetRange ( 0, 6 ), dt );
+                Pshus = ModbusHelper.GetPSHUs(bytes101_151.GetRange(0, 6), dt);
                 DoseStatus = ModbusHelper.GetDoseStatus ( bytes101_151.GetRange ( 12, 1 ), dt );
                 Doses = ModbusHelper.GetDoses ( bytes101_151.GetRange ( 13, 42 ), dt );
+                //var bytesOwen = ModbusHelper.ReadInputRegisters2(0, 10);
+                ////owenDose = ModbusHelper.GetOwenDose(bytesOwen.GetRange(0, 20), dt, bytesOwen.GetRange(84, 4));
+                //cds= ModbusHelper.GetCompressoDatas(bytesOwen.GetRange(0, 10), dt);
 
                 Thread.Sleep ( 700 );
+
+                var bytes211 = ModbusHelper.ReadRegisters(210, 1);
+                Pshu_news = ModbusHelper.GetPSHU_NEWs(bytes211.GetRange(0, 1), dt);
                 var bytes154 = ModbusHelper.ReadRegisters ( 154, 48 );
                 Alarms = ModbusHelper.GetAlarms ( bytes154.GetRange ( 0, 2 ), DateTime.Now );
                 ModbusHelper.GetDoseJobM3 ( bytes154.GetRange ( 6, 2 ), DoseStatus );
@@ -207,6 +215,13 @@ namespace OutReader.Model
                         query += pshuData.ToSql ();
                     }
                 }
+                foreach (var pshu_new in Pshu_news)
+                {
+                    foreach (var pshuData_new in pshu_new.PSHUData_news)
+                    {
+                        query += pshuData_new.ToSql();
+                    }
+                }
                 query += DoseStatus.ToSql ();
                 foreach (var dose in Doses)
                 {
@@ -215,7 +230,7 @@ namespace OutReader.Model
                         query += doseData.ToSql ();
                     }
                 }
-                query += new DataUpdate () { CreatedAt = DateTime.Now }.ToSql ();
+                //query += new DataUpdate() { CreatedAt = DateTime.Now }.ToSql();
                 //foreach (var compressorData in cds)
                 //{
                 //    query += compressorData.ToSql();

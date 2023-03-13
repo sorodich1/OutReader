@@ -982,8 +982,12 @@ namespace OutReader.Helper
                     tag["CurrentValue"] = streamLux.Mb16D.DI[1] || prev2 < streamLux.Mb16D.D2Counter;
                     tag = conn.GetObject("OSV.Tags.JAW.drain_overflow");
                     tag["CurrentValue"] = streamLux.Mb16D.DI[2];
+                    tag = conn.GetObject("OSV.Tags.JAW.pn_pump1");
+                    tag["CurrentValue"] = streamLux.Mb16D.DI[14];
+                    tag = conn.GetObject("OSV.Tags.JAW.pn_pump2");
+                    tag["CurrentValue"] = streamLux.Mb16D.DI[15];
 
-                    }
+                }
                 }
             }
 

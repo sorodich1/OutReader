@@ -166,6 +166,8 @@ namespace OutReader.Helper
                         query += getQueryKNS(kns.LastUpdate, kns.KNSId, 28, kns.MB16Ds[0].DI[8]); //поплавок Высокий А
                         query += getQueryKNS(kns.LastUpdate, kns.KNSId, 10, kns.MB16Ds[0].DI[12]); //Работа дренажного насоса
                     }
+                   
+
                     //ГКНС
                     else if (kns.KNSId == "GKNS")
                     {
@@ -192,8 +194,10 @@ namespace OutReader.Helper
                         }
                         if (kns.KNSId == "KNS17")
                         {
-                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 30, !kns.MB16Ds[0].DI[11]); //поплавок Авария А
-                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 29, !kns.MB16Ds[0].DI[6]); //поплавок Высокий В
+                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 27, kns.MB16Ds[0].DI[4]); //поплавок Низкий Н
+                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 28, kns.MB16Ds[0].DI[5]); //поплавок Средний С
+                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 30, kns.MB16Ds[0].DI[11]); //поплавок Авария А
+                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 29, kns.MB16Ds[0].DI[6]); //поплавок Высокий В
                         }
                         else if (kns.KNSId == "KNS12")
                         {
@@ -224,7 +228,14 @@ namespace OutReader.Helper
                             query += getQueryKNS(kns.LastUpdate, kns.KNSId, 30, kns.MB16Ds[0].DI[7]); //поплавок Авария А
                             query += getQueryKNS(kns.LastUpdate, kns.KNSId, 29, kns.MB16Ds[0].DI[7]); //поплавок Высокий В
                         }
-                        
+                        else if (kns.KNSId == "KNS14")
+                        {
+                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 27, !kns.MB16Ds[0].DI[3]); //поплавок Низкий Н
+                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 28, !kns.MB16Ds[0].DI[4]); //поплавок Высокий С
+                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 29, !kns.MB16Ds[0].DI[5]); //поплавок Высокий В
+                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 30, !kns.MB16Ds[0].DI[5]); //поплавок Аварийный А
+                        }
+
                         /////////////////////////////
                         ///////////////Маргелова//////////////
                         else if (kns.KNSId == "KNS24")
@@ -237,9 +248,9 @@ namespace OutReader.Helper
                         }
                         /////////////////////////////
                         //////////Кресты///////////
-                        else if (kns.KNSId == "KNS25")
+                        else if (kns.KNSId == "KNS04")
                         {
-                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 22, !kns.MB16Ds[0].DI[0]);//Дверь
+                            query += getQueryKNS(kns.LastUpdate, kns.KNSId, 22, kns.MB16Ds[0].DI[0]);//Дверь
                             //query += getQueryKNS(kns.LastUpdate, kns.KNSId, 27, kns.MB16Ds[0].DI[4]);//поплавок Ниже-нижнего НН
                             //query += getQueryKNS(kns.LastUpdate, kns.KNSId, 28, kns.MB16Ds[0].DI[5]); //поплавок Низкий Н
                             //query += getQueryKNS(kns.LastUpdate, kns.KNSId, 29, kns.MB16Ds[0].DI[6]); //поплавок средний С

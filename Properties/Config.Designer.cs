@@ -12,7 +12,7 @@ namespace OutReader.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Config : global::System.Configuration.ApplicationSettingsBase {
         
         private static Config defaultInstance = ((Config)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Config())));
@@ -121,7 +121,7 @@ namespace OutReader.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("502")]
+        [global::System.Configuration.DefaultSettingValueAttribute("21710")]
         public int StreamLuxPort {
             get {
                 return ((int)(this["StreamLuxPort"]));
@@ -433,7 +433,7 @@ namespace OutReader.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("192.168.8.86")]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.8.99")]
         public string StreamLuxIP {
             get {
                 return ((string)(this["StreamLuxIP"]));

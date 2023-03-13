@@ -40,7 +40,7 @@ namespace OutReader.Model.LiftWater
             using (TcpClient client = new TcpClient(IP, 502))
             {
                 ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
-                
+
                 // read five registers		
                 ushort[] registers = master.ReadHoldingRegisters(1, startAddress, count);
                 res = registers.Select(x => BitConverter.GetBytes(x)).ToList();
@@ -59,64 +59,117 @@ namespace OutReader.Model.LiftWater
                     client.SendTimeout = 3000;
                     client.ReceiveTimeout = 3000;
                     ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
-                
-                    ushort[] registers = master.ReadInputRegisters(100, startAddress, count);
+
+                    ushort[] registers = master.ReadHoldingRegisters(60, startAddress, count);
                     res = registers.Select(x => BitConverter.GetBytes(x)).ToList();
                 }
             }
-            catch (Exception ex) { 
-            }
+            catch (Exception ex) { }
             return res;
         }
-
-        public static List<byte[]> ReadInputRegisters2(ushort startAddress = 0, ushort count = 20)
+        public static List<byte[]> ReadInputRegisters_2(ushort startAddress = 0, ushort count = 20)
         {
             var res = new List<byte[]>();
-            //try
-            //{
-            //    using (TcpClient client = new TcpClient(IPOWEN, 502))
-            //    {
-            //        client.SendTimeout = 30;
-            //        client.ReceiveTimeout = 30;
-            //        ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
-            //        ushort[] registers = master.ReadInputRegisters(100, startAddress, count);
-            //        res = registers.Select(x => BitConverter.GetBytes(x)).ToList();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //}
-
-            List<byte[]> bytes = new List<byte[]>();
             try
             {
                 using (TcpClient client = new TcpClient(IPOWEN, 502))
                 {
-                    var a = BitConverter.GetBytes(startAddress);
-                var c = BitConverter.GetBytes(count);
-                var vt = new byte[] { (byte)100, 4, a[1], a[0], c[1], c[0], 0, 0 };
-                //var crc = BitConverter.GetBytes(ModRTU_CRC(vt, 6));
-                //vt[6] = crc[0];
-                //vt[7] = crc[1];
-                client.Client.Send(vt);
-                NetworkStream stream = client.GetStream();
-                stream.WriteTimeout = 15000; //  <------- 15 second timeout
-                stream.ReadTimeout = 15000;
-                var buffer = new byte[6 + count * 2];
-                int bytesRead = stream.Read(buffer, 0, buffer.Length);
-                for (var i = 3; i < buffer.Length - 2; i += 2)
-                    bytes.Add(new byte[]
-                    {
-                        buffer[i + 1], buffer[i]
-                    });
+                    client.SendTimeout = 3000;
+                    client.ReceiveTimeout = 3000;
+                    ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
+
+                    ushort[] registers = master.ReadHoldingRegisters(61, startAddress, count);
+                    res = registers.Select(x => BitConverter.GetBytes(x)).ToList();
                 }
             }
-            catch (Exception ex)
-            {
-                var zz = ex;
-            }
+            catch (Exception ex) { }
             return res;
         }
+        public static List<byte[]> ReadCoils (ushort startAddress = 0, ushort count = 10)
+        {
+            var res = new List<byte[]>();
+            try
+            {
+                using (TcpClient client = new TcpClient(IPOWEN, 502))
+                {
+                    client.SendTimeout = 3000;
+                    client.ReceiveTimeout = 3000;
+                    ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
+
+                    bool[] registers = master.ReadCoils(60, startAddress, count);
+                    res = registers.Select(x => BitConverter.GetBytes(x)).ToList();
+                }
+            }
+            catch (Exception ex) { }
+            return res;
+        }
+        //public static List<byte[]> ReadCoils_2(ushort startAddress = 0, ushort count = 10)
+        //{
+        //    var res = new List<byte[]>();
+        //    try
+        //    {
+        //        using (TcpClient client = new TcpClient(IPOWEN, 502))
+        //        {
+        //            client.SendTimeout = 3000;
+        //            client.ReceiveTimeout = 3000;
+        //            ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
+
+        //            bool[] registers = master.ReadCoils(60, startAddress, count);
+        //            res = registers.Select(x => BitConverter.GetBytes(x)).ToList();
+        //        }
+        //    }
+        //    catch (Exception ex) { }
+        //    return res;
+        //}
+
+        //public static List<byte[]> ReadInputRegisters2(ushort startAddress = 0, ushort count = 20)
+        //{
+        //    var res = new List<byte[]>();
+        //    try
+        //    {
+        //        using (TcpClient client = new TcpClient(IPOWEN, 502))
+        //        {
+        //            client.SendTimeout = 30;
+        //            client.ReceiveTimeout = 30;
+        //            ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
+        //            ushort[] registers = master.ReadInputRegisters(1, startAddress, count);
+        //            res = registers.Select(x => BitConverter.GetBytes(x)).ToList();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //    }
+
+        //    List<byte[]> bytes = new List<byte[]>();
+        //    try
+        //    {
+        //        using (TcpClient client = new TcpClient(IPOWEN, 502))
+        //        {
+        //            var a = BitConverter.GetBytes(startAddress);
+        //        var c = BitConverter.GetBytes(count);
+        //        var vt = new byte[] { (byte)100, 4, a[1], a[0], c[1], c[0], 0, 0 };
+        //        //var crc = BitConverter.GetBytes(ModRTU_CRC(vt, 6));
+        //        //vt[6] = crc[0];
+        //        //vt[7] = crc[1];
+        //        client.Client.Send(vt);
+        //        NetworkStream stream = client.GetStream();
+        //        stream.WriteTimeout = 15000; //  <------- 15 second timeout
+        //        stream.ReadTimeout = 15000;
+        //        var buffer = new byte[6 + count * 2];
+        //        int bytesRead = stream.Read(buffer, 0, buffer.Length);
+        //        for (var i = 3; i < buffer.Length - 2; i += 2)
+        //            bytes.Add(new byte[]
+        //            {
+        //                buffer[i + 1], buffer[i]
+        //            });
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var zz = ex;
+        //    }
+        //    return res;
+        //}
 
         private static ushort ModRTU_CRC(byte[] buf, int len)
         {
@@ -204,14 +257,14 @@ namespace OutReader.Model.LiftWater
                             OperationTime =
                                 ConverterHelper.ByteToInt(new byte[]
                                 {bytes[4][0], bytes[4][1], bytes[5][0], bytes[5][1]}),
-                            Sysdate = dt, 
+                            Sysdate = dt,
                             WellPumpId = 1,
                             Alarm=al1
                         }
                     }
                 });
             }
-            
+
             //well2
             var isDIs2 = ConverterHelper.ByteToBools(bytes[14]);
             var isPumps2 = ConverterHelper.ByteToBools(bytes[15]);
@@ -233,7 +286,7 @@ namespace OutReader.Model.LiftWater
                         ConverterHelper.ByteToReal(new byte[] { bytes[26][0], bytes[26][1], bytes[27][0], bytes[27][1] }),
                     Level = ConverterHelper.ByteToInt16(bytes[20]),
                     PressCamera = ConverterHelper.ByteToInt16(bytes[21]) * 0.01, //0.01 Bar
-                    Press =  (ConverterHelper.ByteToInt16(bytes[22]) * 0.01* 1.6-1.3) / 1.47, //0.01 Bar
+                    Press = (ConverterHelper.ByteToInt16(bytes[22]) * 0.01 * 1.6 - 1.3) / 1.47, //0.01 Bar
                     Sysdate = dt,
                     WellId = 2
                 });
@@ -546,13 +599,13 @@ namespace OutReader.Model.LiftWater
             //var time2 = ConverterHelper.ByteToReal(bytes[5], bytes[6]);
             //if (float.IsNaN(time2)) time2 = 0;
 
-            //var speed3f = 0.0;
-            //var speed3 = ConverterHelper.ByteToInt16(bytes[11]);
-            //if (speed3 == -1) speed3f = -1;
-            //else if (speed3 == 0) speed3f = 0;
-            //else speed3f = speed3 * 0.01 / 2;
-            //var time3 = ConverterHelper.ByteToReal(bytes[9], bytes[10]);
-            //if (float.IsNaN(time3)) time3 = 0;
+            var speed3f = 0.0;
+            var speed3 = ConverterHelper.ByteToInt16(bytes[11]);
+            if (speed3 == -1) speed3f = -1;
+            else if (speed3 == 0) speed3f = 0;
+            else speed3f = speed3 * 0.01 / 2;
+            var time3 = ConverterHelper.ByteToReal(bytes[9], bytes[10]);
+            if (float.IsNaN(time3)) time3 = 0;
 
             //var speed4f = 0.0;
             //var speed4 = ConverterHelper.ByteToInt16(bytes[15]);
@@ -576,7 +629,7 @@ namespace OutReader.Model.LiftWater
                         AlarmCode = new byte[] {bytes[0][1]},
                         OperationTime =Convert.ToDecimal(time1),
                         Speed = Convert.ToInt32(speed1f),
-                        Sysdate = dt, 
+                        Sysdate = dt,
                         PumpId = 1,
                         IsCommFault = is1221[3]
                     }
@@ -602,26 +655,26 @@ namespace OutReader.Model.LiftWater
             //        }
             //    }
             //});
-            //lwps.Add(new LiftWaterPump()
-            //{
-            //    Id = 4,
-            //    Title = "12.2.3",
-            //    LiftWaterPumpDatas = new List<LiftWaterPumpData>()
-            //    {
-            //        new LiftWaterPumpData()
-            //        {
-            //            IsAccessMode = is1223[0],
-            //            IsActive = is1223[1],
-            //            IsPumpAlarm = is1223[2],
-            //            AlarmCode = new byte[] {bytes[8][1]},
-            //            OperationTime =Convert.ToDecimal(time3),
-            //            Speed =  Convert.ToInt32(speed3f),
-            //            Sysdate = dt, 
-            //            PumpId = 4,
-            //            IsCommFault = is1223[3]
-            //        }
-            //    }
-            //});
+            lwps.Add(new LiftWaterPump()
+            {
+                Id = 4,
+                Title = "12.2.3",
+                LiftWaterPumpDatas = new List<LiftWaterPumpData>()
+                {
+                    new LiftWaterPumpData()
+                    {
+                        IsAccessMode = is1223[0],
+                        IsActive = is1223[1],
+                        IsPumpAlarm = is1223[2],
+                        AlarmCode = new byte[] {bytes[8][1]},
+                        OperationTime =Convert.ToDecimal(time3),
+                        Speed =  Convert.ToInt32(speed3f),
+                        Sysdate = dt,
+                        PumpId = 4,
+                        IsCommFault = is1223[3]
+                    }
+                }
+            });
             //lwps.Add(new LiftWaterPump()
             //{
             //    Id = 5,
@@ -649,7 +702,7 @@ namespace OutReader.Model.LiftWater
         {
             var lwps = new List<LiftWaterPump>();
             var is1222 = ConverterHelper.ByteToInt16(bState[0]);
-            //var is1223 = ConverterHelper.ByteToBools(bytes[8]);
+            var is1223 = ConverterHelper.ByteToBools(bState[8]);
             //var is1224 = ConverterHelper.ByteToBools(bytes[12]);
 
             //var speed1f = 0.0;
@@ -669,6 +722,13 @@ namespace OutReader.Model.LiftWater
             //if (float.IsNaN(time2)) time2 = 0;
             var press = ConverterHelper.ByteToReal(bData[1], bData[0]);
 
+            //var speed3f = 0.0;
+            //var speed3 = ConverterHelper.ByteToInt16(bData[11]);
+            //if (speed3 == -1) speed3f = -1;
+            //else if (speed3 == 0) speed3f = 0;
+            //else speed3f = speed3 * 0.01 / 2;
+            //var time3 = ConverterHelper.ByteToReal(bData[9], bData[10]);
+            //if (float.IsNaN(time3)) time3 = 0;
 
             lwps.Add(new LiftWaterPump()
             {
@@ -684,10 +744,10 @@ namespace OutReader.Model.LiftWater
                         AlarmCode = new byte[] {bAlarm[0][0],bAlarm[0][1],bAlarm[1][0],bAlarm[1][1],bAlarm[2][0],bAlarm[2][1]},
                         OperationTime =time2,
                         Speed =  Convert.ToInt32(speed2f),
-                        Sysdate = dt, 
+                        Sysdate = dt,
                         PumpId = 3,
-                        IsCommFault = is1222 == 0, 
-                        Press = Convert.ToDecimal(press), 
+                        IsCommFault = is1222 == 0,
+                        Press = Convert.ToDecimal(press),
                         StateCode = bState[0], WarningCode = new byte[] {bWarning[0][0], bWarning[0][1], bWarning[1][0], bWarning[1][1]}
                     }
                 }
@@ -703,10 +763,10 @@ namespace OutReader.Model.LiftWater
             //            IsAccessMode = is1223[0],
             //            IsActive = is1223[1],
             //            IsPumpAlarm = is1223[2],
-            //            AlarmCode = new byte[] {bytes[8][1]},
+            //            AlarmCode = new byte[] {bData[8][1]},
             //            OperationTime =Convert.ToDecimal(time3),
             //            Speed =  Convert.ToInt32(speed3f),
-            //            Sysdate = dt, 
+            //            Sysdate = dt,
             //            PumpId = 4,
             //            IsCommFault = is1223[3]
             //        }
@@ -882,7 +942,7 @@ namespace OutReader.Model.LiftWater
                         IsAlarm = v1[4],
                         IsAuto = v1[5],
                         IsNotOpenAlarm = v1[6],
-                        IsNotClosedAlarm = v1[7], Sysdate = dt, 
+                        IsNotClosedAlarm = v1[7], Sysdate = dt,
                         ValveId = 1
                     }
                 }
@@ -900,7 +960,7 @@ namespace OutReader.Model.LiftWater
                         IsAlarm = v2[4],
                         IsAuto = v2[5],
                         IsNotOpenAlarm = v2[6],
-                        IsNotClosedAlarm = v2[7], Sysdate = dt, 
+                        IsNotClosedAlarm = v2[7], Sysdate = dt,
                         ValveId = 2
                     }
                 }
@@ -918,7 +978,7 @@ namespace OutReader.Model.LiftWater
                         IsAlarm = v3[4],
                         IsAuto = v3[5],
                         IsNotOpenAlarm = v3[6],
-                        IsNotClosedAlarm = v3[7], Sysdate = dt, 
+                        IsNotClosedAlarm = v3[7], Sysdate = dt,
                         ValveId = 3
                     }
                 }
@@ -936,7 +996,7 @@ namespace OutReader.Model.LiftWater
                         IsAlarm = v4[4],
                         IsAuto = v4[5],
                         IsNotOpenAlarm = v4[6],
-                        IsNotClosedAlarm = v4[7], Sysdate = dt, 
+                        IsNotClosedAlarm = v4[7], Sysdate = dt,
                         ValveId = 4
                     }
                 }
@@ -954,7 +1014,7 @@ namespace OutReader.Model.LiftWater
                         IsAlarm = v5[4],
                         IsAuto = v5[5],
                         IsNotOpenAlarm = v5[6],
-                        IsNotClosedAlarm = v5[7], Sysdate = dt, 
+                        IsNotClosedAlarm = v5[7], Sysdate = dt,
                         ValveId = 5
                     }
                 }
@@ -972,7 +1032,7 @@ namespace OutReader.Model.LiftWater
                         IsAlarm = v6[4],
                         IsAuto = v6[5],
                         IsNotOpenAlarm = v6[6],
-                        IsNotClosedAlarm = v6[7], Sysdate = dt, 
+                        IsNotClosedAlarm = v6[7], Sysdate = dt,
                         ValveId = 6
                     }
                 }
@@ -990,7 +1050,7 @@ namespace OutReader.Model.LiftWater
                         IsAlarm = v7[4],
                         IsAuto = v7[5],
                         IsNotOpenAlarm = v7[6],
-                        IsNotClosedAlarm = v7[7], Sysdate = dt, 
+                        IsNotClosedAlarm = v7[7], Sysdate = dt,
                         ValveId = 7
                     }
                 }
@@ -1008,7 +1068,7 @@ namespace OutReader.Model.LiftWater
                         IsAlarm = v8[4],
                         IsAuto = v8[5],
                         IsNotOpenAlarm = v8[6],
-                        IsNotClosedAlarm = v8[7], Sysdate = dt, 
+                        IsNotClosedAlarm = v8[7], Sysdate = dt,
                         ValveId = 8
                     }
                 }
@@ -1026,7 +1086,7 @@ namespace OutReader.Model.LiftWater
                         IsAlarm = v9[4],
                         IsAuto = v9[5],
                         IsNotOpenAlarm = v9[6],
-                        IsNotClosedAlarm = v9[7], Sysdate = dt, 
+                        IsNotClosedAlarm = v9[7], Sysdate = dt,
                         ValveId = 9
                     }
                 }
@@ -1044,7 +1104,7 @@ namespace OutReader.Model.LiftWater
                         IsAlarm = v10[4],
                         IsAuto = v10[5],
                         IsNotOpenAlarm = v10[6],
-                        IsNotClosedAlarm = v10[7], Sysdate = dt, 
+                        IsNotClosedAlarm = v10[7], Sysdate = dt,
                         ValveId = 10
                     }
                 }
@@ -1165,6 +1225,30 @@ namespace OutReader.Model.LiftWater
             });
             return ps;
         }
+        public static List<PSHU_NEW> GetPSHU_NEWs(List<byte[]> bytes, DateTime dt)
+        {
+            var p7 = ConverterHelper.ByteToBools(bytes[0]);
+
+            var ps = new List<PSHU_NEW>();
+
+            ps.Add(new PSHU_NEW()
+            {
+                Id = 7,
+                Title = "24.1",
+                PSHUData_news = new List<PSHUData_new>()
+                {
+                    new PSHUData_new()
+                    {
+                        IsClosed = p7[0],
+                        IsOpen = p7[1],
+                        IsPress = p7[2],
+                        IsAuto = p7[5], Sysdate = dt,
+                        PSHUId = 7
+                    }
+                }
+            });
+            return ps;
+        }
         /// <summary>
         /// 113, count=1
         /// </summary>
@@ -1188,6 +1272,7 @@ namespace OutReader.Model.LiftWater
                 IsLevelwater2 = d[9]
             };
         }
+
         /// <summary>
         /// 114, count=40
         /// </summary>
@@ -1211,7 +1296,7 @@ namespace OutReader.Model.LiftWater
                 DoseDatas = new List<DoseData>(){new DoseData()
             {
                 IsActive = d1[0],IsDist = d1[1], IsAlarm = d1[2], IsAuto = d1[3],IsHC = d1[4], IsOff = d1[9], IsCF = d1[15],
-                IsMembrF = d1_1[0], IsLL = d1_1[1], IsLLL = d1_1[2], IsHolo = d1_1[3], 
+                IsMembrF = d1_1[0], IsLL = d1_1[1], IsLLL = d1_1[2], IsHolo = d1_1[3],
                 Deb = ConverterHelper.ByteToReal(bytes[2],bytes[3]),
                 DebSP = ConverterHelper.ByteToReal(bytes[4],bytes[5]),
                 DebSum = ConverterHelper.ByteToReal(bytes[6],bytes[7]),
@@ -1226,7 +1311,7 @@ namespace OutReader.Model.LiftWater
                 DoseDatas = new List<DoseData>(){new DoseData()
             {
                 IsActive = d2[0],IsDist = d2[1], IsAlarm = d2[2], IsAuto = d2[3],IsHC = d2[4], IsOff = d2[9], IsCF = d2[15],
-                IsMembrF = d2_1[0], IsLL = d2_1[1], IsLLL = d2_1[2], IsHolo = d2_1[3], 
+                IsMembrF = d2_1[0], IsLL = d2_1[1], IsLLL = d2_1[2], IsHolo = d2_1[3],
                 Deb = ConverterHelper.ByteToReal(bytes[12],bytes[13]),
                 DebSP = ConverterHelper.ByteToReal(bytes[14],bytes[15]),
                 DebSum = ConverterHelper.ByteToReal(bytes[16],bytes[17]),
@@ -1360,18 +1445,18 @@ namespace OutReader.Model.LiftWater
             catch (Exception ex) { }
         }
 
-        public static void GetAlarmsLiftWaterPumps ( List<LiftWaterPump> pumps, List<byte []> bytes )
+        public static void GetAlarmsLiftWaterPumps(List<LiftWaterPump> pumps, List<byte[]> bytes)
         {
             try
             {
-                var a1 = ConverterHelper.ByteToInt16 ( bytes [0] );
-                var a2 = ConverterHelper.ByteToInt16 ( bytes [1] );
-                var a3 = ConverterHelper.ByteToInt16 ( bytes [2] );
-                var a4 = ConverterHelper.ByteToInt16 ( bytes [3] );
-                if (a1 > 0) pumps [0].LiftWaterPumpDatas.FirstOrDefault ().Alarm = PumpsAlarms ( a1 );
-                if (a2 > 0) pumps [1].LiftWaterPumpDatas.FirstOrDefault ().Alarm = PumpsAlarms ( a2 );
-                if (a3 > 0) pumps [2].LiftWaterPumpDatas.FirstOrDefault ().Alarm = PumpsAlarms ( a3 );
-                if (a4 > 0) pumps [3].LiftWaterPumpDatas.FirstOrDefault ().Alarm = PumpsAlarms ( a4 );
+                var a1 = ConverterHelper.ByteToInt16(bytes[0]);
+                var a2 = ConverterHelper.ByteToInt16(bytes[1]);
+                var a3 = ConverterHelper.ByteToInt16(bytes[2]);
+                var a4 = ConverterHelper.ByteToInt16(bytes[3]);
+                if (a1 > 0) pumps[0].LiftWaterPumpDatas.FirstOrDefault().Alarm = PumpsAlarms(a1);
+                if (a2 > 0) pumps[1].LiftWaterPumpDatas.FirstOrDefault().Alarm = PumpsAlarms(a2);
+                if (a3 > 0) pumps[2].LiftWaterPumpDatas.FirstOrDefault().Alarm = PumpsAlarms(a3);
+                if (a4 > 0) pumps[3].LiftWaterPumpDatas.FirstOrDefault().Alarm = PumpsAlarms(a4);
             }
             catch (Exception ex) { }
         }
@@ -1386,19 +1471,19 @@ namespace OutReader.Model.LiftWater
                 var a4 = ConverterHelper.ByteToInt16(bytes[4]);
                 var a5 = ConverterHelper.ByteToInt16(bytes[5]);
                 var a6 = ConverterHelper.ByteToInt16(bytes[6]);
-                wells[0].WellPumps.First().WellPumpDatas.First().Temp = Convert.ToDecimal(a1*0.01);
-                wells[0].WellPumps.First().WellPumpDatas.First().Humidity = Convert.ToDecimal(a2 *0.01);
-                wells[0].WellPumps.First().WellPumpDatas.First().DewPoint = Convert.ToDecimal(a3*0.01);
-                wells[1].WellPumps.First().WellPumpDatas.First().Temp = Convert.ToDecimal(a4*0.01);
-                wells[1].WellPumps.First().WellPumpDatas.First().Humidity = Convert.ToDecimal(a5*0.01);
+                wells[0].WellPumps.First().WellPumpDatas.First().Temp = Convert.ToDecimal(a1 * 0.01);
+                wells[0].WellPumps.First().WellPumpDatas.First().Humidity = Convert.ToDecimal(a2 * 0.01);
+                wells[0].WellPumps.First().WellPumpDatas.First().DewPoint = Convert.ToDecimal(a3 * 0.01);
+                wells[1].WellPumps.First().WellPumpDatas.First().Temp = Convert.ToDecimal(a4 * 0.01);
+                wells[1].WellPumps.First().WellPumpDatas.First().Humidity = Convert.ToDecimal(a5 * 0.01);
                 wells[1].WellPumps.First().WellPumpDatas.First().DewPoint = Convert.ToDecimal(a6 * 0.01);
             }
             catch (Exception ex) { }
         }
 
-        public static OwenDose GetOwenDose(List<byte[]> bytes, DateTime dt,List<byte[]> bytes2=null)
+        public static OwenDose GetOwenDose(List<byte[]> bytes, DateTime dt, List<byte[]> bytes2 = null)
         {
-            
+
             try
             {
                 var dose = new OwenDose();
@@ -1497,7 +1582,7 @@ namespace OutReader.Model.LiftWater
         public static string PumpsAlarms(int code)
         {
             if (code == 10) return "";
-           var dict = new Dictionary<int, string>()
+            var dict = new Dictionary<int, string>()
             {
                 {1, "1: Ток утечки"},
                 {35, "35: Воздух в насосе, проблемадеаэрирования"},
@@ -1683,75 +1768,133 @@ namespace OutReader.Model.LiftWater
                 return "Not code:" + code.ToString();
         }
 
-        internal static List<CompressorData> GetCompressoDatas(List<byte[]> bytes, DateTime dt)
+        internal static List<CompressorData> GetCompressorDatas(List<byte[]> bytes, DateTime dt)
         {
-            var zero = new byte[] {0, 0};
-            var c1 = new CompressorData
+            var zero = new byte[] { 0, 0 };
+            //var c1 = new CompressorData
+            var compressors = new List<CompressorData>();
+            //var c1 = new Compressor();
+            //var c2 = new Compressor();
+            compressors.Add(new CompressorData()
             {
                 CompressorId = 1,
-                Press = ConverterHelper.ByteToInt16(bytes[0])*0.001m,
-                TempOutput = ConverterHelper.ByteToInt16(bytes[1])*0.1m,
-                TempDew = ConverterHelper.ByteToInt16(bytes[2])*0.1m,
-                Temp = ConverterHelper.ByteToInt16(bytes[3])*0.1m,
-                IsLinearStarter = bytes[8][0] == 0x00,
-                IsStarStarter = bytes[9][0] == 0x00,
-                IsTriangleStarter = bytes[10][0] == 0x00,
-                IsLoading = bytes[11][0] == 0x00,
-                IsAlarmButton = bytes[12][0] == 0x00,
-                IsDehumidifierMotor = bytes[13][0] == 0x00,
-                MMS = ConverterHelper.ByteToInt16(bytes[20]),
-                MCM = ConverterHelper.ByteToInt16(bytes[21]),
-                GS = ConverterHelper.ByteToInt16(bytes[22]),
-                IsAlarmDI = bytes[26][0] == 0x00,
-                IsOverloadDI = bytes[27][0] == 0x00,
-                IsDrainageDI = bytes[28][0] == 0x00,
-                OperationTime = (ConverterHelper.ByteToInt(zero, bytes[32]) + ConverterHelper.ByteToInt(zero, bytes[33]) * 65636) / 3600,
-                OperationTimeLoad = (ConverterHelper.ByteToInt(zero, bytes[34]) + ConverterHelper.ByteToInt(zero, bytes[35]) * 65636) / 3600,
-                StartCount = ConverterHelper.ByteToInt(zero, bytes[36]) + ConverterHelper.ByteToInt(zero, bytes[37]) * 65636,
-                LoadRelay = ConverterHelper.ByteToInt(zero, bytes[38]) + ConverterHelper.ByteToInt(zero, bytes[39]) * 65636,
-                StartDehumidifier = ConverterHelper.ByteToInt(zero, bytes[40]) + ConverterHelper.ByteToInt(zero, bytes[41]) * 65636,
-                HoursControl = ConverterHelper.ByteToInt(zero, bytes[42]) + ConverterHelper.ByteToInt(zero, bytes[43]) * 65636,
-                Sysdate = dt,
-                IsRotationProtection = bytes[44][0] == 0x01,
-                IsDehumidifierProtaction = bytes[45][0] == 0x01,
-                IsAlarmPress = bytes[46][0] == 0x01,
-                Coils = ConverterHelper.ByteToInt16(bytes[50]),
-                IsActive = Convert.ToString(bytes[50][0], 2).Last() == '1'
-            };
-            var c2 = new CompressorData
-            {
-                CompressorId = 2,
-                Press = ConverterHelper.ByteToInt16(bytes[4]) * 0.001m,
-                TempOutput = ConverterHelper.ByteToInt16(bytes[5]) * 0.1m,
-                TempDew = ConverterHelper.ByteToInt16(bytes[6]) * 0.1m,
+                Press = ConverterHelper.ByteToInt16(bytes[1]) * 0.001m,
+                TempOutput = ConverterHelper.ByteToInt16(bytes[3]) * 0.1m,
+                TempDew = ConverterHelper.ByteToInt16(bytes[5]) * 0.1m,
                 Temp = ConverterHelper.ByteToInt16(bytes[7]) * 0.1m,
-                IsLinearStarter = bytes[14][0] == 0x00,
-                IsStarStarter = bytes[15][0] == 0x00,
-                IsTriangleStarter = bytes[16][0] == 0x00,
-                IsLoading = bytes[17][0] == 0x00,
-                IsAlarmButton = bytes[18][0] == 0x00,
-                IsDehumidifierMotor = bytes[19][0] == 0x00,
-                MMS = ConverterHelper.ByteToInt16(bytes[23]),
-                MCM = ConverterHelper.ByteToInt16(bytes[24]),
-                GS = ConverterHelper.ByteToInt16(bytes[25]),
-                IsAlarmDI = bytes[29][0] == 0x00,
-                IsOverloadDI = bytes[30][0] == 0x00,
-                IsDrainageDI = bytes[31][0] == 0x00,
-                OperationTime = (ConverterHelper.ByteToInt(zero, bytes[52]) + ConverterHelper.ByteToInt(zero, bytes[53]) * 65636) / 3600,
-                OperationTimeLoad = (ConverterHelper.ByteToInt(zero, bytes[54]) + ConverterHelper.ByteToInt(zero, bytes[55]) * 65636) / 3600,
-                StartCount = ConverterHelper.ByteToInt(zero, bytes[56]) + ConverterHelper.ByteToInt(zero, bytes[57]) * 65636,
-                LoadRelay = ConverterHelper.ByteToInt(zero, bytes[58]) + ConverterHelper.ByteToInt(zero, bytes[59]) * 65636,
-                StartDehumidifier = ConverterHelper.ByteToInt(zero, bytes[60]) + ConverterHelper.ByteToInt(zero, bytes[61]) * 65636,
-                HoursControl = ConverterHelper.ByteToInt(zero, bytes[62]) + ConverterHelper.ByteToInt(zero, bytes[63]) * 65636,
+                //IsLinearStarter = bytes[0][0] == '1',
+                //IsStarStarter = bytes[0][0] == 0x01,
+                //IsTriangleStarter = bytes[0][0] == 0x01,
+                //IsLoading = bytes[11][0] == 0x00,
+                //IsAlarmButton = bytes[12][0] == 0x00,
+                //IsDehumidifierMotor = bytes[13][0] == 0x00,
+                //MMS = ConverterHelper.ByteToInt16(bytes[20]),
+                //MCM = ConverterHelper.ByteToInt16(bytes[21]),
+                //GS = ConverterHelper.ByteToInt16(bytes[22]),
+                //IsAlarmDI = bytes[26][0] == 0x00,
+                //IsOverloadDI = bytes[27][0] == 0x00,
+                //IsDrainageDI = bytes[28][0] == 0x00,
+                //OperationTime = (ConverterHelper.ByteToInt(zero, bytes[32]) + ConverterHelper.ByteToInt(zero, bytes[33]) * 65636) / 3600,
+                //OperationTimeLoad = (ConverterHelper.ByteToInt(zero, bytes[34]) + ConverterHelper.ByteToInt(zero, bytes[35]) * 65636) / 3600,
+                //StartCount = ConverterHelper.ByteToInt(zero, bytes[36]) + ConverterHelper.ByteToInt(zero, bytes[37]) * 65636,
+                //LoadRelay = ConverterHelper.ByteToInt(zero, bytes[38]) + ConverterHelper.ByteToInt(zero, bytes[39]) * 65636,
+                //StartDehumidifier = ConverterHelper.ByteToInt(zero, bytes[40]) + ConverterHelper.ByteToInt(zero, bytes[41]) * 65636,
+                //HoursControl = ConverterHelper.ByteToInt(zero, bytes[42]) + ConverterHelper.ByteToInt(zero, bytes[43]) * 65636,
                 Sysdate = dt,
-                IsRotationProtection = bytes[47][0] == 0x01,
-                IsDehumidifierProtaction = bytes[48][0] == 0x01,
-                IsAlarmPress = bytes[49][0] == 0x01,
-                Coils = ConverterHelper.ByteToInt16(bytes[51]),
-                IsActive = Convert.ToString(bytes[51][0], 2).Last() == '1'
+                //IsRotationProtection = bytes[44][0] == 0x01,
+                //IsDehumidifierProtaction = bytes[45][0] == 0x01,
+                //IsAlarmPress = bytes[46][0] == 0x01,
+                //Coils = ConverterHelper.ByteToInt16(bytes[50]),
+                //IsActive = bytes[10][0] == 0x01,
+            });
+            //compressors.Add(new CompressorData()
+            //{
+            //    //CompressorId = 1,
+            //    //IsRotationProtection = bytes[44][0] == 0x01,
+            //    //IsDehumidifierProtaction = bytes[45][0] == 0x01,
+            //    //IsAlarmPress = bytes[46][0] == 0x01,
+            //    //Coils = ConverterHelper.ByteToInt16(bytes[50]),
+            //    IsActive = bytes[0][0] == 0x01,
+            //    //IsLinearStarter = bytes[0][0] == '1',
+            //    //IsStarStarter = bytes[0][0] == 0x01,
+            //    //IsTriangleStarter = bytes[0][0] == 0x01,
+            //    //IsLoading = bytes[11][0] == 0x00,
+            //    //IsAlarmButton = bytes[12][0] == 0x00,
+            //    //IsDehumidifierMotor = bytes[13][0] == 0x00,
+            //    //MMS = ConverterHelper.ByteToInt16(bytes[20]),
+            //    //MCM = ConverterHelper.ByteToInt16(bytes[21]),
+            //    //GS = ConverterHelper.ByteToInt16(bytes[22]),
+            //    //IsAlarmDI = bytes[26][0] == 0x00,
+            //    //IsOverloadDI = bytes[27][0] == 0x00,
+            //    //IsDrainageDI = bytes[28][0] == 0x00,
+            //});
+
+            return compressors;
+        }
+        internal static List<CompressorCoils> GetCoilsData(List<byte[]> bytes, DateTime dt)
+        {
+            var zero = new byte[] { 0, 0 };
+            var coils1 = new CompressorCoils
+            {
+                CompressorId = 1,
+                //IsRotationProtection = bytes[44][0] == 0x01,
+                //IsDehumidifierProtaction = bytes[45][0] == 0x01,
+                //IsAlarmPress = bytes[46][0] == 0x01,
+                //Coils = ConverterHelper.ByteToInt16(bytes[50]),
+                IsActive = bytes[0][0] == 0x01,
+                //IsLinearStarter = bytes[0][0] == '1',
+                //IsStarStarter = bytes[0][0] == 0x01,
+                //IsTriangleStarter = bytes[0][0] == 0x01,
+                //IsLoading = bytes[11][0] == 0x00,
+                //IsAlarmButton = bytes[12][0] == 0x00,
+                //IsDehumidifierMotor = bytes[13][0] == 0x00,
+                //MMS = ConverterHelper.ByteToInt16(bytes[20]),
+                //MCM = ConverterHelper.ByteToInt16(bytes[21]),
+                //GS = ConverterHelper.ByteToInt16(bytes[22]),
+                //IsAlarmDI = bytes[26][0] == 0x00,
+                //IsOverloadDI = bytes[27][0] == 0x00,
+                //IsDrainageDI = bytes[28][0] == 0x00,
             };
 
-            return new List<CompressorData>() {c1, c2};
+
+            return new List<CompressorCoils>() { coils1 };
+        }
+        internal static List<CompressorData_2> GetCompressorDatas_2(List<byte[]> bytes, DateTime dt)
+        {
+            var zero = new byte[] { 0, 0 };
+            var c2 = new CompressorData_2
+            {
+                CompressorId = 2,
+                Press = ConverterHelper.ByteToInt16(bytes[1]) * 0.001m,
+                TempOutput = ConverterHelper.ByteToInt16(bytes[3]) * 0.1m,
+                TempDew = ConverterHelper.ByteToInt16(bytes[5]) * 0.1m,
+                Temp = ConverterHelper.ByteToInt16(bytes[7]) * 0.1m,
+                IsLinearStarter = bytes[0][0] == 0x01,
+                IsStarStarter = bytes[0][0] == 0x01,
+                IsTriangleStarter = bytes[0][0] == 0x01,
+                //IsLoading = bytes[17][0] == 0x00,
+                //IsAlarmButton = bytes[18][0] == 0x00,
+                //IsDehumidifierMotor = bytes[19][0] == 0x00,
+                //MMS = ConverterHelper.ByteToInt16(bytes[23]),
+                //MCM = ConverterHelper.ByteToInt16(bytes[24]),
+                //GS = ConverterHelper.ByteToInt16(bytes[25]),
+                //IsAlarmDI = bytes[29][0] == 0x00,
+                //IsOverloadDI = bytes[30][0] == 0x00,
+                //IsDrainageDI = bytes[31][0] == 0x00,
+                //OperationTime = (ConverterHelper.ByteToInt(zero, bytes[52]) + ConverterHelper.ByteToInt(zero, bytes[53]) * 65636) / 3600,
+                //OperationTimeLoad = (ConverterHelper.ByteToInt(zero, bytes[54]) + ConverterHelper.ByteToInt(zero, bytes[55]) * 65636) / 3600,
+                //StartCount = ConverterHelper.ByteToInt(zero, bytes[56]) + ConverterHelper.ByteToInt(zero, bytes[57]) * 65636,
+                //LoadRelay = ConverterHelper.ByteToInt(zero, bytes[58]) + ConverterHelper.ByteToInt(zero, bytes[59]) * 65636,
+                //StartDehumidifier = ConverterHelper.ByteToInt(zero, bytes[60]) + ConverterHelper.ByteToInt(zero, bytes[61]) * 65636,
+                //HoursControl = ConverterHelper.ByteToInt(zero, bytes[62]) + ConverterHelper.ByteToInt(zero, bytes[63]) * 65636,
+                Sysdate = dt,
+                //IsRotationProtection = bytes[47][0] == 0x01,
+                //IsDehumidifierProtaction = bytes[48][0] == 0x01,
+                //IsAlarmPress = bytes[49][0] == 0x01,
+                //Coils = ConverterHelper.ByteToInt16(bytes[51]),
+                //IsActive = Convert.ToString(bytes[51][0], 2).Last() == '1'
+            };
+            return new List<CompressorData_2>() { c2 };
         }
     }
 }

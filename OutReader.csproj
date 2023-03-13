@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>58</ApplicationRevision>
+    <ApplicationRevision>66</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -106,6 +106,10 @@
     <Compile Include="Model\GKNS_2.cs" />
     <Compile Include="Model\Kns.cs" />
     <Compile Include="Model\KnsDevice.cs" />
+    <Compile Include="Model\LiftWater\CompressorCoils.cs" />
+    <Compile Include="Model\LiftWater\CompressorData_2.cs" />
+    <Compile Include="Model\LiftWater\PSHUD_NEW.cs" />
+    <Compile Include="Model\LiftWater\PSHU_NEW.cs" />
     <Compile Include="Model\MB8A_GKNS.cs" />
     <Compile Include="Model\MB8A_KRESTY.cs" />
     <Compile Include="Model\MB8A_OBEH.cs" />
